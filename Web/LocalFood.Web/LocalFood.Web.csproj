@@ -36,4 +36,10 @@
     <ProjectReference Include="..\LocalFood.Web.Infrastructure\LocalFood.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\LocalFood.Web.ViewModels\LocalFood.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\css\minty-theme.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
