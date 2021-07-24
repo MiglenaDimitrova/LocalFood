@@ -3,6 +3,7 @@ namespace LocalFood.Data.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using LocalFood.Data.Common.Models;
 
@@ -17,6 +18,9 @@ namespace LocalFood.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
+
+        [Required]
+        public bool IsProducer { get; set; } = false;
 
         // Audit info
         public DateTime CreatedOn { get; set; }

@@ -72,3 +72,10 @@ body {
     white-space: nowrap;
     line-height: 60px;  Vertically center the text there 
 }
+
+.full-width-div {
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+

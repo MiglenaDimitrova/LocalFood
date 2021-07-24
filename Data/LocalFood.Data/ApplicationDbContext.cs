@@ -24,6 +24,22 @@
         {
         }
 
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<ContactForm> ContactForms { get; set; }
+
+        public DbSet<FoodLoss> FoodLosses { get; set; }
+
+        public DbSet<Location> Locations { get; set; }
+
+        public DbSet<Map> Maps { get; set; }
+
+        public DbSet<MapLocation> MapsLocations { get; set; }
+
+        public DbSet<Producer> Producers { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
