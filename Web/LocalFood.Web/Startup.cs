@@ -1,4 +1,4 @@
-﻿namespace LocalFood.Web
+﻿ namespace LocalFood.Web
 {
     using System.Reflection;
 
