@@ -390,12 +390,9 @@ namespace LocalFood.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-<<<<<<< HEAD
                     b.Property<string>("CompanyName")
                         .HasColumnType("nvarchar(max)");
 
-=======
->>>>>>> d310f82f51a91e4db8912c9789ccf6e9bd9671d9
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -409,13 +406,10 @@ namespace LocalFood.Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-=======
->>>>>>> d310f82f51a91e4db8912c9789ccf6e9bd9671d9
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
@@ -425,26 +419,20 @@ namespace LocalFood.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-<<<<<<< HEAD
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-=======
->>>>>>> d310f82f51a91e4db8912c9789ccf6e9bd9671d9
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-<<<<<<< HEAD
-=======
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
->>>>>>> d310f82f51a91e4db8912c9789ccf6e9bd9671d9
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
