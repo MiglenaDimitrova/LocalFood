@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
+    // [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
     public class ProductsController : BaseController
     {
         public IActionResult Add()
