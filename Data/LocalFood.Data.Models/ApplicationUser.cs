@@ -22,8 +22,11 @@ namespace LocalFood.Data.Models
         [Required]
         public bool IsProducer { get; set; } = false;
 
+<<<<<<< HEAD
         public bool ProducerWithProfile { get; set; } = false;
 
+=======
+>>>>>>> d310f82f51a91e4db8912c9789ccf6e9bd9671d9
         // Audit info
         public DateTime CreatedOn { get; set; }
 
