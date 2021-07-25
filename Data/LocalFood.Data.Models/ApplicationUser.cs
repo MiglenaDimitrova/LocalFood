@@ -20,7 +20,7 @@ namespace LocalFood.Data.Models
         }
 
         [Required]
-        public bool IsProducer { get; set; } = false;
+        public bool IsProducer { get; set; }
 
         public bool ProducerWithProfile { get; set; } = false;
 
