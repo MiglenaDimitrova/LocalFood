@@ -21,12 +21,28 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+                        @if (User.IsInRole(GlobalConstants.ProducerRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Producers" asp-action="Create">Създай профил</a>
+                            </li>
+                        }
+                        @if (User.IsInRole(GlobalConstants.ProducerWithProfileRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Add">Добави продукт</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="MyProducts">Моите продукти</a>
+                            </li>
+                        }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Add">Добави продукт</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Producers" asp-action="All">Производители</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="MyProducts">Моите продукти</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="All">Продукти</a>
                         </li>
+
                     </ul>
                 </div>
             </div>

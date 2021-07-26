@@ -15,6 +15,8 @@
 
         public string Image { get; set; }
 
+        public bool IsBio { get; set; } = false;
+
         public int ProducerId { get; set; }
 
         public Producer Producer { get; set; }

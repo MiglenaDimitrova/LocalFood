@@ -1,6 +1,8 @@
 ﻿namespace LocalFood.Web.ViewModels.Products
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
 
     public class ProductInputModel
     {
@@ -20,8 +22,13 @@
         [Display(Name = "Снимка")]
         public string Image { get; set; }
 
+        [Display(Name = "Био-продукт")]
+        public bool IsBio { get; set; }
+
         [Required(ErrorMessage ="Въведи категория.")]
         [Display(Name = "Категория")]
         public string Category { get; set; }
+
+        public IEnumerable<SelectListItem> Categories { get; set; }
     }
 }

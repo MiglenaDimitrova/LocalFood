@@ -7,7 +7,7 @@
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-
+    using LocalFood.Common;
     using LocalFood.Data.Models;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
@@ -82,6 +82,11 @@
             {
                 var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email, IsProducer = this.Input.IsProducer };
                 var result = await this._userManager.CreateAsync(user, this.Input.Password);
+                if (this.Input.IsProducer == true)
+                {
+                    await this._userManager.AddToRoleAsync(user, GlobalConstants.ProducerRoleName);
+                }
+
                 if (result.Succeeded)
                 {
                     this._logger.LogInformation("User created a new account with password.");

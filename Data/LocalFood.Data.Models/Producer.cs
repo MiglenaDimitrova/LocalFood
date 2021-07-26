@@ -38,8 +38,6 @@
 
         public string Image { get; set; }
 
-        public bool IsBio { get; set; } = false;
-
         public int LocationId { get; set; }
 
         public Location Location { get; set; }

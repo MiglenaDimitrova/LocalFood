@@ -29,7 +29,9 @@
     </div>
     <div class="form-group">
         <label asp-for="Category"></label>
-        <input asp-for="Category" class="form-control" />
+        <select asp-for="Category" class="form-control" asp-items="@Model.Categories as System.Collections.Generic.IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>">
+            <option> Select</option>
+        </select>
         <span asp-validation-for="Category" class="text-danger"></span>
     </div>
     <input type="submit" class="button btn-primary" value="Добави" />

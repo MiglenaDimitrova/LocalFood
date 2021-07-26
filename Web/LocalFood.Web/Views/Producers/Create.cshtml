@@ -1,0 +1,93 @@
+﻿@model LocalFood.Web.ViewModels.Producers.ProducerInputModel
+@{
+    this.ViewData["Title"] = "Добави профил";
+}
+<h1>@this.ViewData["Title"]</h1>
+    
+<form method="post" class="col-md-6">
+    <div asp-validation-summary="All"></div>
+    <hr>
+    <div class="form-group">
+        <label asp-for="FirstName">
+        </label>
+        <input asp-for="FirstName" class="form-control"  />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CompanyName"></label>
+        <input asp-for="CompanyName" class="form-control" />
+        <span asp-validation-for="CompanyName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image"></label>
+        <input asp-for="Image" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Site"></label>
+        <input asp-for="Site" class="form-control" />
+        <span asp-validation-for="Site" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image"></label>
+        <input asp-for="Image" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CountryName"></label>
+        <input asp-for="CountryName" class="form-control" />
+        <span asp-validation-for="CountryName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Region"></label>
+        <input asp-for="Region" class="form-control" />
+        <span asp-validation-for="Region" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TownName"></label>
+        <input asp-for="TownName" class="form-control" />
+        <span asp-validation-for="TownName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div> За добавяне на картата на вашето местоположение, въведете:</div>
+    <div class="form-group">
+        <label asp-for="Longitude"></label>
+        <input asp-for="Longitude" class="form-control" />
+        <span asp-validation-for="Longitude" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Latitude"></label>
+        <input asp-for="Latitude" class="form-control" />
+        <span asp-validation-for="Latitude" class="text-danger"></span>
+    </div>
+    <input type="submit" class="button btn-primary" value="Създай" />
+</form>
