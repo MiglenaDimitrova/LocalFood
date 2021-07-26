@@ -19,7 +19,7 @@
         public string Region { get; set; }
 
         [Required]
-        public string TownName { get; set; }
+        public string LocalityName { get; set; }
 
         [Required]
         public string Adress { get; set; }

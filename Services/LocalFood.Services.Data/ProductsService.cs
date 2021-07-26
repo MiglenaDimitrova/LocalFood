@@ -42,16 +42,14 @@
             await this.productRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<SelectListItem> GetGategorires()
+        public ICollection<CategoryInputModel> GetCategories()
         {
-            var categories = this.categoryRepository.All().ToList();
-            IEnumerable<SelectListItem> sliCategories = categories
-                .Select(x => new SelectListItem
-            {
-                Text = x.Name,
-                Value = x.Id.ToString(),
-            });
-            return sliCategories;
+            return this.categoryRepository.All().ToList()
+                .Select(x => new CategoryInputModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                }).ToList();
         }
     }
 }

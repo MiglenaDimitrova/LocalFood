@@ -18,7 +18,7 @@
 
         public IActionResult Add()
         {
-            var categories = this.productsService.GetGategorires();
+            var categories = this.productsService.GetCategories();
 
             var model = new ProductInputModel
             {

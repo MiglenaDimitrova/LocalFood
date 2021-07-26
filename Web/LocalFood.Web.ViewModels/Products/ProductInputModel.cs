@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;
 
     public class ProductInputModel
     {
@@ -29,6 +28,6 @@
         [Display(Name = "Категория")]
         public string Category { get; set; }
 
-        public IEnumerable<SelectListItem> Categories { get; set; }
+        public ICollection<CategoryInputModel> Categories { get; set; }
     }
 }
