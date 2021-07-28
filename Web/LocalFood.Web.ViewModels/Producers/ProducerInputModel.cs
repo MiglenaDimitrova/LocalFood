@@ -34,7 +34,7 @@
         public string Site { get; set; }
 
         [Required]
-        [MinLength(100)]
+        [MinLength(10)]
         [Display(Name = "Описание")]
         public string Description { get; set; }
 
@@ -50,8 +50,8 @@
         public string Region { get; set; }
 
         [Required]
-        [Display(Name = "Град")]
-        public string TownName { get; set; }
+        [Display(Name = "Населено място")]
+        public string LocalityName { get; set; }
 
         [Required]
         [Display(Name = "Адрес")]

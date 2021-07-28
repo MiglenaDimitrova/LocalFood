@@ -7,6 +7,7 @@
 
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
+    using LocalFood.Services.Mapping;
     using LocalFood.Web.ViewModels.Products;
 
     public class ProductsService : IProductsService
@@ -27,7 +28,7 @@
 
         public async Task AddProduct(ProductInputModel input, string userId)
         {
-            var category = this.categoryRepository.All().FirstOrDefault(x => x.Name == input.Category);
+            var category = this.categoryRepository.All().FirstOrDefault(x => x.Name == input.CategoryName);
             var producer = this.producerRepository.All().FirstOrDefault(x => x.ApplicationUserId == userId);
             var product = new Product
             {
@@ -47,9 +48,29 @@
             return this.categoryRepository.All().ToList()
                 .Select(x => new CategoryInputModel
                 {
-                    Id = x.Id,
-                    Name = x.Name,
-                }).ToList();
+                    CategoryName = x.Name,
+                })
+                .ToList();
+        }
+
+        public IEnumerable<ProductViewModel> GetMyProducts(string userId, int page, int itemsPerPage = 12)
+        {
+            var producer = this.producerRepository.AllAsNoTracking().FirstOrDefault(x => x.ApplicationUserId == userId);
+            return this.productRepository.AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .Where(x => x.ProducerId == producer.Id)
+                .To<ProductViewModel>()
+                .ToList();
+        }
+
+        public int MyProductsCount(string userId)
+        {
+            var producer = this.producerRepository.AllAsNoTracking().FirstOrDefault(x => x.ApplicationUserId == userId);
+            return this.productRepository.AllAsNoTracking()
+                .Where(x => x.ProducerId == producer.Id)
+                .Count();
         }
     }
 }

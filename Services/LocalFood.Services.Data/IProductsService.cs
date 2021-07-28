@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System.Web.Mvc;
+
     using LocalFood.Data.Models;
     using LocalFood.Web.ViewModels.Products;
 
@@ -11,5 +11,9 @@
         Task AddProduct(ProductInputModel input, string userId);
 
         ICollection<CategoryInputModel> GetCategories();
+
+        IEnumerable<ProductViewModel> GetMyProducts(string userId, int page, int itemsPerPage);
+
+        int MyProductsCount(string userId);
     }
 }

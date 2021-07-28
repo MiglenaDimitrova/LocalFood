@@ -26,7 +26,7 @@
 
         [Required(ErrorMessage ="Въведи категория.")]
         [Display(Name = "Категория")]
-        public string Category { get; set; }
+        public string CategoryName { get; set; }
 
         public ICollection<CategoryInputModel> Categories { get; set; }
     }

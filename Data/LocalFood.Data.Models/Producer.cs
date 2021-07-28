@@ -33,7 +33,7 @@
         public string Site { get; set; }
 
         [Required]
-        [MinLength(100)]
+        [MinLength(10)]
         public string Description { get; set; }
 
         public string Image { get; set; }
