@@ -1,0 +1,37 @@
+﻿@model LocalFood.Web.ViewModels.Producers.ProducersListViewModel
+<div class="row">
+    @foreach (var producer in Model.Producers)
+    {
+        <div class="media col-md-4 ">
+            <div class="card mb-3">
+                <h3 class="card-header">@producer.FullName</h3>
+                <div class="card-body">
+                    <h5 class="card-title">@producer.CompanyName</h5>
+                    <h6 class="card-subtitle text-muted">@producer.FullAddress</h6>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+                    <image href=@producer.Image class="media-object mr-3 img-responsive" width="100%" height="200" />
+                    @*<rect width="100%" height="100%" fill="#868e96"></rect>
+                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>*@
+                </svg>
+                <div class="card-body">
+                    <p class="card-text">@producer.Description</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@producer.PhoneNumber</li>
+                    <li class="list-group-item">@producer.Site</li>
+                    <li class="list-group-item">@producer.Email</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+                <div class="card-footer text-muted">
+                    2 days ago
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<hr />
+<partial name="_PagingAllPartial" model="@Model">

@@ -1,0 +1,36 @@
+﻿@model LocalFood.Web.ViewModels.Products.ProductsListViewModel
+@{
+    this.ViewData["Title"] = "Продукти";
+}
+<hr />
+<div class="row">
+    @foreach (var product in this.Model.Products)
+    {
+        <div class="media col-md-4">
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object mr-3 img-responsive" width="100" src="@product.Image">
+                </a>
+            </div>
+            <div class="col">
+                <div class="media-body">
+                    <h4 class="media-heading">@product.Name</h4>
+                </div>
+                <div class="media-body">
+                    <h5 class="media-heading">@product.CategoryName</h5>
+                </div>
+                <div class="media-body">
+                    <h6 class="media-heading">@product.Description</h6>
+                </div>
+                <div class="media-body">
+                    <h6 class="media-heading">@product.ProducerName</h6>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">@product.Price</h4>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<hr />
+<partial name="_PagingAllPartial" model="@Model">

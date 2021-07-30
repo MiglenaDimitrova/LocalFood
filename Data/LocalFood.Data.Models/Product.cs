@@ -13,16 +13,18 @@
 
         public string Description { get; set; }
 
-        public string Image { get; set; }
+        public string ImageId { get; set; }
+
+        public virtual Image Image { get; set; }
 
         public bool IsBio { get; set; } = false;
 
         public int ProducerId { get; set; }
 
-        public Producer Producer { get; set; }
+        public virtual Producer Producer { get; set; }
 
         public int CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

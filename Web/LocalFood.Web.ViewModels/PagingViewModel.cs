@@ -10,13 +10,13 @@
 
         public bool HasNextPage => this.PageNumber < this.PageCount;
 
-        public int PageCount => (int)Math.Ceiling((double)this.ProductsCount / this.ItemsPerPage);
+        public int PageCount => (int)Math.Ceiling((double)this.ItemsCount / this.ItemsPerPage);
 
         public int PrevoiusPageNumber => this.PageNumber - 1;
 
         public int NextPageNumber => this.PageNumber + 1;
 
-        public int ProductsCount { get; set; }
+        public int ItemsCount { get; set; }
 
         public int ItemsPerPage { get; set; }
     }

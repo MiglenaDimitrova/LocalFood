@@ -12,7 +12,7 @@
 
         public int ProducerId { get; set; }
 
-        public Producer Producer { get; set; }
+        public virtual Producer Producer { get; set; }
 
         [Required]
         public string Description { get; set; }

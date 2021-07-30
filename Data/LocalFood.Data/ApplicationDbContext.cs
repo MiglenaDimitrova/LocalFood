@@ -30,6 +30,8 @@
 
         public DbSet<FoodLoss> FoodLosses { get; set; }
 
+        public DbSet<Image> Images { get; set; }
+
         public DbSet<Location> Locations { get; set; }
 
         public DbSet<Map> Maps { get; set; }

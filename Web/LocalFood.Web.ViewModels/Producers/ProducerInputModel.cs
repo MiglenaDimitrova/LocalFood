@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using LocalFood.Data.Models;
+    using Microsoft.AspNetCore.Http;
 
     public class ProducerInputModel
     {
@@ -21,6 +22,9 @@
         [MinLength(3, ErrorMessage = "Името трябва да съдържа поне 3 символа.")]
         public string CompanyName { get; set; }
 
+        [Display(Name = "Снимка")]
+        public IFormFile Image { get; set; }
+
         [Required]
         [Display(Name = "Телефонен номер")]
         [RegularExpression("[0-9]{10}")]
@@ -37,9 +41,6 @@
         [MinLength(10)]
         [Display(Name = "Описание")]
         public string Description { get; set; }
-
-        [Display(Name = "Прикачи снимка")]
-        public string Image { get; set; }
 
         [Required]
         [Display(Name = "Държава")]

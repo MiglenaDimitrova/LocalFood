@@ -3,10 +3,12 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using Microsoft.AspNetCore.Http;
+
     public class ProductInputModel
     {
         [Required]
-        [Display(Name="Име")]
+        [Display(Name="Име на продукт")]
         [MinLength(3, ErrorMessage ="Името трябва да съдържа поне 3 символа.")]
         public string Name { get; set; }
 
@@ -19,10 +21,10 @@
         public string Description { get; set; }
 
         [Display(Name = "Снимка")]
-        public string Image { get; set; }
+        public IFormFile Image { get; set; }
 
         [Display(Name = "Био-продукт")]
-        public bool IsBio { get; set; }
+        public string IsBio { get; set; }
 
         [Required(ErrorMessage ="Въведи категория.")]
         [Display(Name = "Категория")]

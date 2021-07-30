@@ -1,9 +1,10 @@
 ﻿namespace LocalFood.Web.ViewModels.Products
 {
+    using AutoMapper;
     using LocalFood.Data.Models;
     using LocalFood.Services.Mapping;
 
-    public class ProductViewModel : IMapFrom<Product>
+    public class ProductViewModel // : IMapFrom<Product>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -24,5 +25,12 @@
         public string CategoryName { get; set; }
 
         public int CategoryId { get; set; }
+
+        // public void CreateMappings(IProfileExpression configuration)
+        // {
+        //    configuration.CreateMap<Product, ProductInputModel>()
+        //        .ForMember(x => x.Image, opt =>
+        //        opt.MapFrom(x => $"/images/products/{x.Image.Id}.{x.Image.Extension}"));
+        // }
     }
 }

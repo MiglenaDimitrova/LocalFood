@@ -36,11 +36,13 @@
         [MinLength(10)]
         public string Description { get; set; }
 
-        public string Image { get; set; }
+        public string ImageId { get; set; }
+
+        public virtual Image Image { get; set; }
 
         public int LocationId { get; set; }
 
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
 
