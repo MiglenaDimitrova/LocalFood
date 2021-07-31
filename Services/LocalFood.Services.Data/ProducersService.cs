@@ -14,19 +14,28 @@
     public class ProducersService : IProducersService
     {
         private readonly IDeletableEntityRepository<Producer> producersRepository;
+        private readonly IDeletableEntityRepository<Country> countriesRepository;
+        private readonly IDeletableEntityRepository<Region> regionsRepository;
         private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
 
-        public ProducersService(IDeletableEntityRepository<Producer> producerRepository)
+        public ProducersService(
+            IDeletableEntityRepository<Producer> producersRepository,
+            IDeletableEntityRepository<Region> regionsRepository,
+            IDeletableEntityRepository<Country> countriesRepository)
         {
-            this.producersRepository = producerRepository;
+            this.producersRepository = producersRepository;
+            this.countriesRepository = countriesRepository;
+            this.regionsRepository = regionsRepository;
         }
 
         public async Task AddProducer(ProducerInputModel input, string userId, string imagePath)
         {
+            var country = this.countriesRepository.All().FirstOrDefault(x => x.Name == input.CountryName);
+            var region = this.regionsRepository.All().FirstOrDefault(x => x.Name == input.RegionName);
             var location = new Location
             {
-                CountryName = input.CountryName,
-                Region = input.Region,
+                Country = country,
+                Region = region,
                 LocalityName = input.LocalityName,
                 Adress = input.Address,
                 Longitude = input.Longitude,

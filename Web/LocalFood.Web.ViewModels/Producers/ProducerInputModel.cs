@@ -47,8 +47,8 @@
         public string CountryName { get; set; }
 
         [Required]
-        [Display(Name = "Регион")]
-        public string Region { get; set; }
+        [Display(Name = "Област")]
+        public string RegionName { get; set; }
 
         [Required]
         [Display(Name = "Населено място")]

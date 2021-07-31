@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocalFood.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210728134515_AddImage")]
-    partial class AddImage
+    [Migration("20210731065307_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -216,6 +216,36 @@ namespace LocalFood.Data.Migrations
                     b.ToTable("ContactForms");
                 });
 
+            modelBuilder.Entity("LocalFood.Data.Models.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Countries");
+                });
+
             modelBuilder.Entity("LocalFood.Data.Models.FoodLoss", b =>
                 {
                     b.Property<int>("Id")
@@ -299,9 +329,8 @@ namespace LocalFood.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CountryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -325,13 +354,16 @@ namespace LocalFood.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Region")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("RegionId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CountryId");
+
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("RegionId");
 
                     b.ToTable("Locations");
                 });
@@ -523,6 +555,41 @@ namespace LocalFood.Data.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("LocalFood.Data.Models.Region", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Regions");
+                });
+
             modelBuilder.Entity("LocalFood.Data.Models.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -694,6 +761,25 @@ namespace LocalFood.Data.Migrations
                     b.Navigation("AddedByUser");
                 });
 
+            modelBuilder.Entity("LocalFood.Data.Models.Location", b =>
+                {
+                    b.HasOne("LocalFood.Data.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("LocalFood.Data.Models.Region", "Region")
+                        .WithMany()
+                        .HasForeignKey("RegionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+
+                    b.Navigation("Region");
+                });
+
             modelBuilder.Entity("LocalFood.Data.Models.MapLocation", b =>
                 {
                     b.HasOne("LocalFood.Data.Models.Location", "Location")
@@ -761,6 +847,17 @@ namespace LocalFood.Data.Migrations
                     b.Navigation("Image");
 
                     b.Navigation("Producer");
+                });
+
+            modelBuilder.Entity("LocalFood.Data.Models.Region", b =>
+                {
+                    b.HasOne("LocalFood.Data.Models.Country", "Country")
+                        .WithMany("Regions")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("LocationMap", b =>
@@ -841,6 +938,11 @@ namespace LocalFood.Data.Migrations
             modelBuilder.Entity("LocalFood.Data.Models.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("LocalFood.Data.Models.Country", b =>
+                {
+                    b.Navigation("Regions");
                 });
 
             modelBuilder.Entity("LocalFood.Data.Models.Producer", b =>

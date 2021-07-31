@@ -38,6 +38,10 @@
 
         public DbSet<MapLocation> MapsLocations { get; set; }
 
+        public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Region> Regions { get; set; }
+
         public DbSet<Producer> Producers { get; set; }
 
         public DbSet<Product> Products { get; set; }
