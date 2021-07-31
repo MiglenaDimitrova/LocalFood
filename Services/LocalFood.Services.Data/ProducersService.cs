@@ -89,7 +89,7 @@
                      CompanyName = x.CompanyName,
                      Description = x.Description,
                      Email = x.Email,
-                     FullAddress = $"{x.Location.Region}, {x.Location.LocalityName}, {x.Location.Adress}",
+                     FullAddress = $"{x.Location.Region.Name}, {x.Location.LocalityName}, {x.Location.Adress}",
                      PhoneNumber = x.PhoneNumber,
                      Site = x.Site,
                      Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
