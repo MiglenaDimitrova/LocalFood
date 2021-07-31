@@ -96,6 +96,27 @@
                 }).ToList();
         }
 
+        public IEnumerable<CountryInputModel> GetCountryNames()
+        {
+            return this.countriesRepository.All()
+                 .Select(x => new CountryInputModel
+                 {
+                    CountryName = x.Name,
+                 }).ToList();
+        }
+
+        // int countryId - parameter
+        public IEnumerable<RegionInputModel> GetRegionNamesByCountry()
+        {
+            return this.regionsRepository.All()
+
+                 // .Where(x => x.CountryId == countryId)
+                 .Select(x => new RegionInputModel
+                 {
+                     RegionName = x.Name,
+                 }).ToList();
+        }
+
         public int ProducersCount()
         {
             return this.producersRepository.All().Count();

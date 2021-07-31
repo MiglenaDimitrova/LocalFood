@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
     using LocalFood.Web.ViewModels.Producers;
 
     public interface IProducersService
@@ -12,5 +11,9 @@
         IEnumerable<ProducerViewModel> GetAllProducers(int page, int itemsPerPage);
 
         int ProducersCount();
+
+        IEnumerable<CountryInputModel> GetCountryNames();
+
+        public IEnumerable<RegionInputModel> GetRegionNamesByCountry();
     }
 }

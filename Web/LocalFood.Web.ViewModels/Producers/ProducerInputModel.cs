@@ -65,5 +65,9 @@
         [Display(Name = "Географска ширина")]
 
         public double? Latitude { get; set; }
+
+        public IEnumerable<CountryInputModel> Countries { get; set; }
+
+        public IEnumerable<RegionInputModel> Regions { get; set; }
     }
 }

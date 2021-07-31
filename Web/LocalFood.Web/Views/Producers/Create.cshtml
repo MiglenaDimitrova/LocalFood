@@ -48,14 +48,25 @@
         <input asp-for="Description" class="form-control" />
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="CountryName"></label>
-        <input asp-for="CountryName" class="form-control" />
+        <select asp-for="CountryName" class="form-control">
+            @foreach (var country in Model.Countries)
+            {
+                <option value="@country.CountryName">@country.CountryName</option>
+            }
+        </select>
         <span asp-validation-for="CountryName" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="RegionName"></label>
-        <input asp-for="RegionName" class="form-control" />
+        <select asp-for="RegionName" class="form-control">
+            @foreach (var region in Model.Regions)
+            {
+                <option value="@region.RegionName">@region.RegionName</option>
+            }
+        </select>
         <span asp-validation-for="RegionName" class="text-danger"></span>
     </div>
     <div class="form-group">

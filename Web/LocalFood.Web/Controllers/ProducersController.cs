@@ -37,7 +37,18 @@
         [Authorize(Roles = GlobalConstants.ProducerRoleName)]
         public IActionResult Create()
         {
-            return this.View();
+            var countries = this.producersService.GetCountryNames();
+            var model = new ProducerInputModel
+            {
+                Countries = countries,
+            };
+            var regions = this.producersService.GetRegionNamesByCountry();
+
+            // AJAX for  country
+            model.Regions = regions;
+
+
+            return this.View(model);
         }
 
         [Authorize(Roles = GlobalConstants.ProducerRoleName)]
