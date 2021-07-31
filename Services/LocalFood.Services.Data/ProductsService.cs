@@ -41,24 +41,31 @@
                 Price = input.Price,
                 IsBio = bool.Parse(input.IsBio),
             };
-            Directory.CreateDirectory($"{imagePath}/products/");
-            var extension = Path.GetExtension(input.Image.FileName);
-            if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+            if (input.Image == null)
             {
-                throw new Exception($"{extension} e невалидно разширениe.");
+                product.Image = null;
             }
-
-            var dbImage = new Image
+            else
             {
-                AddedByUserId = userId,
-                Extension = extension,
-            };
-            product.Image = dbImage;
+                Directory.CreateDirectory($"{imagePath}/products/");
+                var extension = Path.GetExtension(input.Image.FileName);
+                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+                {
+                    throw new Exception($"{extension} e невалидно разширениe.");
+                }
 
-            var physicalPath = $"{imagePath}/products/{dbImage.Id}.{extension}";
-            using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
-            {
-                await input.Image.CopyToAsync(fileStream);
+                var dbImage = new Image
+                {
+                    AddedByUserId = userId,
+                    Extension = extension,
+                };
+                product.Image = dbImage;
+
+                var physicalPath = $"{imagePath}/products/{dbImage.Id}.{extension}";
+                using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
+                {
+                    await input.Image.CopyToAsync(fileStream);
+                }
             }
 
             await this.productsRepository.AddAsync(product);
@@ -130,6 +137,28 @@
         public int ProductsCount()
         {
             return this.productsRepository.AllAsNoTracking().Count();
+        }
+
+        public IEnumerable<ProductViewModel> ProductsByUser(int producerId, int page, int itemsPerPage = 12)
+        {
+            return this.productsRepository.AllAsNoTracking()
+                .Where(x => x.ProducerId == producerId)
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .Select(x => new ProductViewModel
+                {
+                    CategoryName = x.Category.Name,
+                    CategoryId = x.CategoryId,
+                    Description = x.Description,
+                    IsBio = x.IsBio,
+                    Price = x.Price,
+                    ProducerName = $"{x.Producer.FirstName} {x.Producer.LastName}",
+                    Name = x.Name,
+                    Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
+                    ProducerId = x.ProducerId,
+                })
+                .ToList();
         }
     }
 }

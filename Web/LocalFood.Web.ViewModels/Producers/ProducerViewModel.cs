@@ -1,5 +1,7 @@
 ﻿namespace LocalFood.Web.ViewModels.Producers
 {
+    using System;
+
     public class ProducerViewModel
     {
         public string FullName { get; set; }
@@ -17,5 +19,7 @@
         public string Description { get; set; }
 
         public string FullAddress { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

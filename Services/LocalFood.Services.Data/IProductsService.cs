@@ -19,5 +19,7 @@
         int MyProductsCount(string userId);
 
         int ProductsCount();
+
+        IEnumerable<ProductViewModel> ProductsByUser(int producerId, int page, int itemsPerPage);
     }
 }

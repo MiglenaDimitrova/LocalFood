@@ -55,22 +55,29 @@
                 Location = location,
             };
             Directory.CreateDirectory($"{imagePath}/producers/");
-            var extension = Path.GetExtension(input.Image.FileName);
-            if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+            if (input.Image == null)
             {
-                throw new Exception($"{extension} e невалидно разширениe.");
+                producer.Image = null;
             }
+            else
+            {
+                var extension = Path.GetExtension(input.Image.FileName);
+                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+                {
+                    throw new Exception($"{extension} e невалидно разширениe.");
+                }
 
-            var dbImage = new Image
-            {
-                AddedByUserId = userId,
-                Extension = extension,
-            };
-            producer.Image = dbImage;
-            var physicalPath = $"{imagePath}/producers/{dbImage.Id}.{extension}";
-            using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
-            {
-                await input.Image.CopyToAsync(fileStream);
+                var dbImage = new Image
+                {
+                    AddedByUserId = userId,
+                    Extension = extension,
+                };
+                producer.Image = dbImage;
+                var physicalPath = $"{imagePath}/producers/{dbImage.Id}.{extension}";
+                using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
+                {
+                    await input.Image.CopyToAsync(fileStream);
+                }
             }
 
             await this.producersRepository.AddAsync(producer);
@@ -93,6 +100,7 @@
                      PhoneNumber = x.PhoneNumber,
                      Site = x.Site,
                      Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                     CreatedOn = x.CreatedOn,
                 }).ToList();
         }
 
