@@ -620,6 +620,37 @@ namespace LocalFood.Data.Migrations
                     b.ToTable("Settings");
                 });
 
+            modelBuilder.Entity("LocalFood.Data.Models.Vote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProducerId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("Value")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ProducerId");
+
+                    b.ToTable("Votes");
+                });
+
             modelBuilder.Entity("LocationMap", b =>
                 {
                     b.Property<int>("LocationsId")
@@ -858,6 +889,23 @@ namespace LocalFood.Data.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("LocalFood.Data.Models.Vote", b =>
+                {
+                    b.HasOne("LocalFood.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Votes")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("LocalFood.Data.Models.Producer", "Producer")
+                        .WithMany("Votes")
+                        .HasForeignKey("ProducerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Producer");
+                });
+
             modelBuilder.Entity("LocationMap", b =>
                 {
                     b.HasOne("LocalFood.Data.Models.Location", null)
@@ -931,6 +979,8 @@ namespace LocalFood.Data.Migrations
                     b.Navigation("Logins");
 
                     b.Navigation("Roles");
+
+                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("LocalFood.Data.Models.Category", b =>
@@ -948,6 +998,8 @@ namespace LocalFood.Data.Migrations
                     b.Navigation("FoodLosses");
 
                     b.Navigation("Products");
+
+                    b.Navigation("Votes");
                 });
 #pragma warning restore 612, 618
         }

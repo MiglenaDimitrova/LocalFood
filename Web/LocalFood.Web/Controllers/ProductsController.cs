@@ -119,5 +119,17 @@
             };
             return this.View(model);
         }
+
+        [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
+        public IActionResult Edit()
+        {
+            return this.Json("Edit");
+        }
+
+        [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
+        public IActionResult Delete()
+        {
+            return this.Json("Delete");
+        }
     }
 }

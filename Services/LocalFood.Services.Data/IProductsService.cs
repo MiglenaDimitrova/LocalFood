@@ -21,5 +21,9 @@
         int ProductsCount();
 
         IEnumerable<ProductViewModel> ProductsByUser(int producerId, int page, int itemsPerPage);
+
+        Task EditProduct(int id, ProductInputModel input, string userId, string imagePath);
+
+        void DeleteProduct(int id);
     }
 }

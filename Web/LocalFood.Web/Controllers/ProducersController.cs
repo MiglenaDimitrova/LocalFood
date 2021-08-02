@@ -46,8 +46,6 @@
 
             // AJAX for  country
             model.Regions = regions;
-
-
             return this.View(model);
         }
 

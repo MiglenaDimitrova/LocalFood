@@ -92,15 +92,17 @@
                 .Take(itemsPerPage)
                 .Select(x => new ProducerViewModel
                 {
-                     FullName = $"{x.FirstName} {x.LastName}",
-                     CompanyName = x.CompanyName,
-                     Description = x.Description,
-                     Email = x.Email,
-                     FullAddress = $"{x.Location.Region.Name}, {x.Location.LocalityName}, {x.Location.Adress}",
-                     PhoneNumber = x.PhoneNumber,
-                     Site = x.Site,
-                     Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
-                     CreatedOn = x.CreatedOn,
+                    Id = x.Id,
+                    FullName = $"{x.FirstName} {x.LastName}",
+                    CompanyName = x.CompanyName,
+                    Description = x.Description,
+                    Email = x.Email,
+                    FullAddress = $"{x.Location.Region.Name}, {x.Location.LocalityName}, {x.Location.Adress}",
+                    PhoneNumber = x.PhoneNumber,
+                    Site = x.Site,
+                    Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                    CreatedOn = x.CreatedOn,
+                    AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),
                 }).ToList();
         }
 

@@ -17,6 +17,7 @@ namespace LocalFood.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Votes = new HashSet<Vote>();
         }
 
         [Required]
@@ -37,5 +38,7 @@ namespace LocalFood.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

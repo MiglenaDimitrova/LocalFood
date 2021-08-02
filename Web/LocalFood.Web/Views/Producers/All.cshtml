@@ -27,6 +27,22 @@
                     <a href="#" class="card-link">Card link</a>
                     <a href="#" class="card-link">Another link</a>
                 </div>
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <div class="card-body">
+                        <h5 class="card-text">Оцени</h5>
+                        <fieldset class="rating">
+                            <span class="star" producer-id="@producer.Id" data-vote="1"><i class="fa fa-star"></i></span>
+                            <span class="star" producer-id="@producer.Id" data-vote="2"><i class="fa fa-star"></i></span>
+                            <span class="star" producer-id="@producer.Id" data-vote="3"><i class="fa fa-star"></i></span>
+                            <span class="star" producer-id="@producer.Id" data-vote="4"><i class="fa fa-star"></i></span>
+                            <span class="star" producer-id="@producer.Id" data-vote="5"><i class="fa fa-star"></i></span>
+                            <span class="myratings" id="averageVoteValue @producer.Id">@producer.AverageVote</span>
+                            <span class="myratings"> / 5</span>
+                        </fieldset>
+                    </div>
+                }
+
                 <div class="card-footer text-muted">
                     Регистриран на @producer.CreatedOn.ToShortDateString()
                 </div>
@@ -36,3 +52,26 @@
 </div>
 <hr />
 <partial name="_PagingAllPartial" model="@Model">
+@section Scripts
+{ 
+    <script>
+        $("span[data-vote]").each(function (el) {
+            $(this).click(function () {
+                var value = $(this).attr("data-vote");
+                var producerId = $(this).attr("producer-id");
+                var data = { producerId : producerId, value : value };
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/Votes',
+                    data: JSON.stringify(data),
+                    success: function (data) {
+                        $(document.getElementById('averageVoteValue '+producerId+'')).html(data.averageVote.toFixed(1));
+                    },
+                    contentType: 'application/json'
+                });
+            });
+        });
+
+    </script>
+
+}

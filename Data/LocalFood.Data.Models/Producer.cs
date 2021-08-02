@@ -10,6 +10,8 @@
         public Producer()
         {
             this.Products = new HashSet<Product>();
+            this.FoodLosses = new HashSet<FoodLoss>();
+            this.Votes = new HashSet<Vote>();
         }
 
         [Required]
@@ -47,5 +49,7 @@
         public virtual ICollection<Product> Products { get; set; }
 
         public virtual ICollection<FoodLoss> FoodLosses { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

@@ -160,5 +160,16 @@
                 })
                 .ToList();
         }
+
+        public void DeleteProduct(int id)
+        {
+            var product = this.productsRepository.All().Where(x => x.Id == id).FirstOrDefault();
+            this.productsRepository.Delete(product);
+        }
+
+        public Task EditProduct(int id,ProductInputModel input, string userId, string imagePath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
