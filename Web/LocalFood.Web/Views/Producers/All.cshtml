@@ -52,6 +52,7 @@
 </div>
 <hr />
 <partial name="_PagingAllPartial" model="@Model">
+<form method="post" id="antiForgeryForm"></form>
 @section Scripts
 { 
     <script>
@@ -59,11 +60,15 @@
             $(this).click(function () {
                 var value = $(this).attr("data-vote");
                 var producerId = $(this).attr("producer-id");
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
                 var data = { producerId : producerId, value : value };
                 $.ajax({
                     type: 'POST',
                     url: '/api/Votes',
                     data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken,
+                    },
                     success: function (data) {
                         $(document.getElementById('averageVoteValue '+producerId+'')).html(data.averageVote.toFixed(1));
                     },

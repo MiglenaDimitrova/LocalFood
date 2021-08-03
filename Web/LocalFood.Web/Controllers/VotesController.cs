@@ -20,7 +20,6 @@
 
         [HttpPost]
         [Authorize]
-        [IgnoreAntiforgeryToken]
         public async Task<ActionResult<VoteResponseModel>> Post(VoteInputModel input)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;

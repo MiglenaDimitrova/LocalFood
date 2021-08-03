@@ -92,6 +92,7 @@
                 .Where(x => x.ProducerId == producer.Id)
                 .Select(x => new ProductViewModel
                 {
+                    Id = x.Id,
                     CategoryName = x.Category.Name,
                     CategoryId = x.CategoryId,
                     Description = x.Description,
@@ -113,6 +114,7 @@
                 .Take(itemsPerPage)
                 .Select(x => new ProductViewModel
                 {
+                    Id = x.Id,
                     CategoryName = x.Category.Name,
                     CategoryId = x.CategoryId,
                     Description = x.Description,
@@ -161,15 +163,39 @@
                 .ToList();
         }
 
-        public void DeleteProduct(int id)
+        public async Task DeleteProductAsync(int id)
         {
-            var product = this.productsRepository.All().Where(x => x.Id == id).FirstOrDefault();
+            var product = this.productsRepository.All().FirstOrDefault(x => x.Id == id);
             this.productsRepository.Delete(product);
+            await this.productsRepository.SaveChangesAsync();
         }
 
-        public Task EditProduct(int id,ProductInputModel input, string userId, string imagePath)
+        public EditProductInputModel GetProductById(int id)
         {
-            throw new NotImplementedException();
+            return this.productsRepository.All()
+               .Where(x => x.Id == id)
+               .Select(x => new EditProductInputModel
+               {
+                   Id = x.Id,
+                   Description = x.Description,
+                   Name = x.Name,
+                   IsBio = x.IsBio.ToString(),
+                   Price = x.Price,
+                   CategoryName = x.Category.Name,
+               }).FirstOrDefault();
+        }
+
+        public async Task UpdateProductAsync(int id, EditProductInputModel input)
+        {
+            var product = this.productsRepository.All()
+               .Where(x => x.Id == id).FirstOrDefault();
+            product.Name = input.Name;
+            product.Description = input.Description;
+            product.IsBio = bool.Parse(input.IsBio);
+            product.Price = input.Price;
+            product.Category = this.categoriesRepository.All().FirstOrDefault(x => x.Name == input.CategoryName);
+
+            await this.productsRepository.SaveChangesAsync();
         }
     }
 }

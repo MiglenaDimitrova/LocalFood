@@ -9,8 +9,8 @@
                         <image href=@product.Image class="media-object mr-3 img-responsive" width="100%" height="200" />
                     </svg>
                     @*<a href="#">
-                <img class="media-object mr-3 img-responsive" width="100" src="@product.Image" />"
-            </a>*@
+                            <img class="media-object mr-3 img-responsive" width="100" src="@product.Image" />"
+                        </a>*@
                 </div>
                 <div class="col">
                     <div class="media-body">
@@ -29,14 +29,36 @@
                         <h4 class="media-heading">@product.Price</h4>
                     </div>
                 </div>
-                @if (this.ViewData["Title"] == "Моите продукти")
+                @if ((string)this.ViewData["Title"] == "Моите продукти")
                 {
             <div class="btn-group">
-                <a asp-controller="Products" asp-action="Edit" class="btn btn-warning" role="button" aria-pressed="true">Редактирай</a>
-                <a asp-controller="Products" asp-action="Delete" class="btn btn-danger" role="button" aria-pressed="true">Изтрий</a>
+                <a asp-controller="Products" asp-route-id="@product.Id" asp-action="Edit" class="btn btn-warning" role="button" aria-pressed="true">Редактирай</a>
+                <form method="post" asp-controller="Products" asp-route-id="@product.Id" asp-action="Delete" id="deleteForm">
+                </form>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
             </div>
                 }
             </div>
         </div>
     }
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Изтрий продукт</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Сигурни ли сте, че желаете да изтриете продукта?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="document.getElementById('deleteForm').submit()">Да</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Не</button>
+            </div>
+        </div>
+    </div>
 </div>

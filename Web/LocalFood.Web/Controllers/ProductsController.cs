@@ -46,7 +46,6 @@
         }
 
         [HttpPost]
-
         [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
         public async Task<IActionResult> Add(ProductInputModel input)
         {
@@ -121,15 +120,40 @@
         }
 
         [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            return this.Json("Edit");
+            var categories = this.productsService.GetCategories();
+            var model = this.productsService.GetProductById(id);
+            model.Categories = categories;
+            return this.View(model);
         }
 
         [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
-        public IActionResult Delete()
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditProductInputModel input)
         {
-            return this.Json("Delete");
+            if (!this.ModelState.IsValid)
+            {
+                var categories = this.productsService.GetCategories();
+
+                var model = new EditProductInputModel
+                {
+                    Categories = categories,
+                };
+
+                return this.View(model);
+            }
+
+            await this.productsService.UpdateProductAsync(id, input);
+            return this.Redirect("/Products/MyProducts");
+        }
+
+        [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.productsService.DeleteProductAsync(id);
+            return this.Redirect("/Products/MyProducts");
         }
     }
 }
