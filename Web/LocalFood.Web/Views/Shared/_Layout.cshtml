@@ -27,6 +27,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="All">Продукти</a>
                         </li>
+                        @if (User.IsInRole(GlobalConstants.ConsumerRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Consumers" asp-action="Favorites">Любими</a>
+                            </li>
+                        }
                         @if (User.IsInRole(GlobalConstants.ProducerRoleName))
                         {
                             <li class="nav-item">
@@ -47,7 +53,6 @@
             </div>
         </nav>
     </header>
-
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
