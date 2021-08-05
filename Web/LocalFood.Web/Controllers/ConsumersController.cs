@@ -52,5 +52,12 @@
             await this.producersService.AddProducerToUserCollection(user.Id, id);
             return this.Redirect("/Consumers/Favorites");
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            await this.producersService.DeleteFavorite(user.Id, id);
+            return this.Redirect("/Consumers/Favorites");
+        }
     }
 }

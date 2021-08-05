@@ -197,5 +197,31 @@
 
             await this.productsRepository.SaveChangesAsync();
         }
+
+        public IEnumerable<ProductViewModel> GetProducerProductsAll(int producerId, int page, int itemsPerPage = 12)
+        {
+            return this.productsRepository.All()
+                .Where(x => x.ProducerId == producerId)
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .Select(x => new ProductViewModel
+                {
+                    CategoryName = x.Category.Name,
+                    CategoryId = x.CategoryId,
+                    Description = x.Description,
+                    IsBio = x.IsBio,
+                    Price = x.Price,
+                    ProducerName = $"{x.Producer.FirstName} {x.Producer.LastName}",
+                    Name = x.Name,
+                    Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
+                    ProducerId = x.ProducerId,
+                }).ToList();
+        }
+
+        public int ProducerProductsCount(int producerId)
+        {
+            return this.producersRepository.All().FirstOrDefault(x => x.Id == producerId).Products.Count;
+        }
     }
 }

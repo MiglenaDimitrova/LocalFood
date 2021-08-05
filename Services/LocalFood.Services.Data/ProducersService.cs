@@ -9,6 +9,7 @@
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
     using LocalFood.Web.ViewModels.Producers;
+    using LocalFood.Web.ViewModels.Products;
     using Microsoft.AspNetCore.Http;
 
     public class ProducersService : IProducersService
@@ -16,21 +17,18 @@
         private readonly IDeletableEntityRepository<Producer> producersRepository;
         private readonly IDeletableEntityRepository<Country> countriesRepository;
         private readonly IDeletableEntityRepository<Region> regionsRepository;
-        private readonly IDeletableEntityRepository<ApplicationUser> applicationUsersRepository;
         private readonly IDeletableEntityRepository<UserProducer> usersProducersRepository;
         private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
 
         public ProducersService(
             IDeletableEntityRepository<Producer> producersRepository,
             IDeletableEntityRepository<Region> regionsRepository,
-            IDeletableEntityRepository<ApplicationUser> applicationUsersRepository,
             IDeletableEntityRepository<UserProducer> usersProducersRepository,
             IDeletableEntityRepository<Country> countriesRepository)
         {
             this.producersRepository = producersRepository;
             this.countriesRepository = countriesRepository;
             this.regionsRepository = regionsRepository;
-            this.applicationUsersRepository = applicationUsersRepository;
             this.usersProducersRepository = usersProducersRepository;
         }
 
@@ -190,6 +188,13 @@
             return this.usersProducersRepository.All().Where(x => x.UserId == userId)
                 .Select(x => x.Producer)
                 .ToList().Count;
+        }
+
+        public async Task DeleteFavorite(string userId, int producerId)
+        {
+            var userProducer = this.usersProducersRepository.All().FirstOrDefault(x => x.UserId == userId && x.ProducerId == producerId);
+            this.usersProducersRepository.Delete(userProducer);
+            await this.usersProducersRepository.SaveChangesAsync();
         }
     }
 }

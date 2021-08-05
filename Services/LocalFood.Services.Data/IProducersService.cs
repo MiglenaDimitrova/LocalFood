@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using LocalFood.Web.ViewModels.Producers;
+    using LocalFood.Web.ViewModels.Products;
 
     public interface IProducersService
     {
@@ -21,5 +22,7 @@
         IEnumerable<ProducerViewModel> GetFavoriteProducers(string userId, int page, int itemsPerPage);
 
         int FavoriteProducersCount(string userId);
+
+        Task DeleteFavorite(string userId, int producerId);
     }
 }

@@ -27,5 +27,9 @@
         Task UpdateProductAsync(int id, EditProductInputModel input);
 
         Task DeleteProductAsync(int id);
+
+        IEnumerable<ProductViewModel> GetProducerProductsAll(int producerId, int page, int itemsPerPage);
+
+        int ProducerProductsCount(int producerId);
     }
 }

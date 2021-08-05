@@ -155,5 +155,22 @@
             await this.productsService.DeleteProductAsync(id);
             return this.Redirect("/Products/MyProducts");
         }
+
+        public IActionResult ProducerProductsAll(int producerId, int id = 1)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var model = new ProductsListViewModel
+            {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = id,
+                Products = this.productsService.GetProducerProductsAll(producerId, id, ItemsPerPage),
+                ItemsCount = this.productsService.ProducerProductsCount(producerId),
+            };
+            return this.View(model);
+        }
     }
 }

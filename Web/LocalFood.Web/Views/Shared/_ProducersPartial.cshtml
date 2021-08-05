@@ -21,8 +21,9 @@
                     <li class="list-group-item">@producer.Email</li>
                 </ul>
                 <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <form method="post" asp-controller="Products" asp-route-producerId="@producer.Id" asp-action="ProducerProductsAll">
+                        <button class="btn btn-info">Продукти</button>
+                    </form>
                 </div>
                 @if (this.User.Identity.IsAuthenticated)
                 {
@@ -42,7 +43,7 @@
                 @if ((string)this.ViewData["Title"] == "Любими")
                 {
                     <div class="card-body">
-                        <form method="post" asp-controller="Consumers" asp-route-id="@producer.Id" asp-action="DeleteFromFavorite">
+                        <form method="post" asp-controller="Consumers" asp-route-id="@producer.Id" asp-action="Delete">
                             <button class="btn btn-danger">Премахни от любими</button>
                         </form>
                     </div>
