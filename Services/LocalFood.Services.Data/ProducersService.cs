@@ -16,16 +16,22 @@
         private readonly IDeletableEntityRepository<Producer> producersRepository;
         private readonly IDeletableEntityRepository<Country> countriesRepository;
         private readonly IDeletableEntityRepository<Region> regionsRepository;
+        private readonly IDeletableEntityRepository<ApplicationUser> applicationUsersRepository;
+        private readonly IDeletableEntityRepository<UserProducer> usersProducersRepository;
         private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
 
         public ProducersService(
             IDeletableEntityRepository<Producer> producersRepository,
             IDeletableEntityRepository<Region> regionsRepository,
+            IDeletableEntityRepository<ApplicationUser> applicationUsersRepository,
+            IDeletableEntityRepository<UserProducer> usersProducersRepository,
             IDeletableEntityRepository<Country> countriesRepository)
         {
             this.producersRepository = producersRepository;
             this.countriesRepository = countriesRepository;
             this.regionsRepository = regionsRepository;
+            this.applicationUsersRepository = applicationUsersRepository;
+            this.usersProducersRepository = usersProducersRepository;
         }
 
         public async Task AddProducer(ProducerInputModel input, string userId, string imagePath)
@@ -130,6 +136,60 @@
         public int ProducersCount()
         {
             return this.producersRepository.All().Count();
+        }
+
+        public async Task AddProducerToUserCollection(string userId, int producerId)
+        {
+            var userProducer = this.usersProducersRepository.All().FirstOrDefault(x => x.UserId == userId && x.ProducerId == producerId);
+            var producer = this.producersRepository.All().FirstOrDefault(x => x.Id == producerId);
+            if (userProducer != null)
+            {
+                return;
+            }
+
+            userProducer = new UserProducer
+            {
+                UserId = userId,
+                ProducerId = producerId,
+                Producer = producer,
+            };
+
+            // var user = this.applicationUsersRepository.All().FirstOrDefault(x => x.Id == userId);
+            // user.Producers.Add(userProducer);
+            await this.usersProducersRepository.AddAsync(userProducer);
+            await this.usersProducersRepository.SaveChangesAsync();
+
+            // await this.applicationUsersRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<ProducerViewModel> GetFavoriteProducers(string userId, int page, int itemsPerPage = 12)
+        {
+            return this.usersProducersRepository.All().Where(x => x.UserId == userId)
+                .Select(x => x.Producer)
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .Select(x => new ProducerViewModel
+                {
+                    Id = x.Id,
+                    FullName = $"{x.FirstName} {x.LastName}",
+                    CompanyName = x.CompanyName,
+                    Description = x.Description,
+                    Email = x.Email,
+                    FullAddress = $"{x.Location.Region.Name}, {x.Location.LocalityName}, {x.Location.Adress}",
+                    PhoneNumber = x.PhoneNumber,
+                    Site = x.Site,
+                    Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                    CreatedOn = x.CreatedOn,
+                    AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),
+                }).ToList();
+        }
+
+        public int FavoriteProducersCount(string userId)
+        {
+            return this.usersProducersRepository.All().Where(x => x.UserId == userId)
+                .Select(x => x.Producer)
+                .ToList().Count;
         }
     }
 }

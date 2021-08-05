@@ -4,14 +4,16 @@ using LocalFood.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LocalFood.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210804145130_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,6 +246,35 @@ namespace LocalFood.Data.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("LocalFood.Data.Models.Favorite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Favorites");
+                });
+
             modelBuilder.Entity("LocalFood.Data.Models.FoodLoss", b =>
                 {
                     b.Property<int>("Id")
@@ -459,6 +490,9 @@ namespace LocalFood.Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("FavoriteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -489,6 +523,8 @@ namespace LocalFood.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("FavoriteId");
 
                     b.HasIndex("ImageId");
 
@@ -618,45 +654,6 @@ namespace LocalFood.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
-                });
-
-            modelBuilder.Entity("LocalFood.Data.Models.UserProducer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProducerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ProducerId");
-
-                    b.ToTable("UsersProducers");
                 });
 
             modelBuilder.Entity("LocalFood.Data.Models.Vote", b =>
@@ -875,6 +872,10 @@ namespace LocalFood.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("LocalFood.Data.Models.Favorite", null)
+                        .WithMany("Producers")
+                        .HasForeignKey("FavoriteId");
+
                     b.HasOne("LocalFood.Data.Models.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
@@ -926,23 +927,6 @@ namespace LocalFood.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("LocalFood.Data.Models.UserProducer", b =>
-                {
-                    b.HasOne("LocalFood.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Producers")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("LocalFood.Data.Models.Producer", "Producer")
-                        .WithMany()
-                        .HasForeignKey("ProducerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Producer");
                 });
 
             modelBuilder.Entity("LocalFood.Data.Models.Vote", b =>
@@ -1034,8 +1018,6 @@ namespace LocalFood.Data.Migrations
 
                     b.Navigation("Logins");
 
-                    b.Navigation("Producers");
-
                     b.Navigation("Roles");
 
                     b.Navigation("Votes");
@@ -1049,6 +1031,11 @@ namespace LocalFood.Data.Migrations
             modelBuilder.Entity("LocalFood.Data.Models.Country", b =>
                 {
                     b.Navigation("Regions");
+                });
+
+            modelBuilder.Entity("LocalFood.Data.Models.Favorite", b =>
+                {
+                    b.Navigation("Producers");
                 });
 
             modelBuilder.Entity("LocalFood.Data.Models.Producer", b =>

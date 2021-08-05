@@ -1,5 +1,6 @@
 ﻿namespace LocalFood.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using LocalFood.Common;
     using LocalFood.Data.Models;
@@ -23,33 +24,33 @@
             this.userManager = userManager;
         }
 
-        //[Authorize(Roles = GlobalConstants.ConsumerRoleName)]
-        //public async Task<IActionResult> Favorites(int id = 1)
-        //{
-        //    if (id <= 0)
-        //    {
-        //        return this.NotFound();
-        //    }
+        [Authorize(Roles = GlobalConstants.ConsumerRoleName)]
+        public async Task<IActionResult> Favorites(int id = 1)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
 
-        //    var user = await this.userManager.GetUserAsync(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
 
-        //    var model = new ProducersListViewModel
-        //    {
-        //        ItemsPerPage = ItemsPerPage,
-        //        PageNumber = id,
-        //        Producers = this.producersService.GetFavoriteProducers(user.Id, id, ItemsPerPage),
-        //        ItemsCount = user.Producers.Count,
-        //    };
-        //    return this.View(model);
-        //}
+            var model = new ProducersListViewModel
+            {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = id,
+                Producers = this.producersService.GetFavoriteProducers(user.Id, id, ItemsPerPage),
+                ItemsCount = this.producersService.FavoriteProducersCount(user.Id),
+            };
+            return this.View(model);
+        }
 
-        //[Authorize(Roles = GlobalConstants.ConsumerRoleName)]
-        //[HttpPost]
-        //public async Task<IActionResult> AddToFavorites(int id)
-        //{
-        //    var user = await this.userManager.GetUserAsync(this.User);
-        //    await this.producersService.AddProducerToUserCollection(user.Id, id);
-        //    return this.Redirect("/Consumers/Favorites");
-        //}
+        [Authorize(Roles = GlobalConstants.ConsumerRoleName)]
+        [HttpPost]
+        public async Task<IActionResult> AddToFavorites(int id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            await this.producersService.AddProducerToUserCollection(user.Id, id);
+            return this.Redirect("/Consumers/Favorites");
+        }
     }
 }

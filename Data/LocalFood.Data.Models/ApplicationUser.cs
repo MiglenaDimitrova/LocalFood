@@ -4,7 +4,7 @@ namespace LocalFood.Data.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     using LocalFood.Data.Common.Models;
 
     using Microsoft.AspNetCore.Identity;
@@ -18,6 +18,7 @@ namespace LocalFood.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Votes = new HashSet<Vote>();
+            this.Producers = new HashSet<UserProducer>();
         }
 
         [Required]
@@ -40,5 +41,8 @@ namespace LocalFood.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public virtual ICollection<Vote> Votes { get; set; }
+
+        [ForeignKey("ApplicationUserId")]
+        public virtual ICollection<UserProducer> Producers { get; set; }
     }
 }

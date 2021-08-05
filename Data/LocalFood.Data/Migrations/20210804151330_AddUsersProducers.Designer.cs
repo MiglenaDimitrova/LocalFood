@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocalFood.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210801160735_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210804151330_AddUsersProducers")]
+    partial class AddUsersProducers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -622,6 +622,45 @@ namespace LocalFood.Data.Migrations
                     b.ToTable("Settings");
                 });
 
+            modelBuilder.Entity("LocalFood.Data.Models.UserProducer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProducerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("ProducerId");
+
+                    b.ToTable("UsersProducers");
+                });
+
             modelBuilder.Entity("LocalFood.Data.Models.Vote", b =>
                 {
                     b.Property<int>("Id")
@@ -891,6 +930,23 @@ namespace LocalFood.Data.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("LocalFood.Data.Models.UserProducer", b =>
+                {
+                    b.HasOne("LocalFood.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Producers")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("LocalFood.Data.Models.Producer", "Producer")
+                        .WithMany()
+                        .HasForeignKey("ProducerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Producer");
+                });
+
             modelBuilder.Entity("LocalFood.Data.Models.Vote", b =>
                 {
                     b.HasOne("LocalFood.Data.Models.ApplicationUser", "ApplicationUser")
@@ -979,6 +1035,8 @@ namespace LocalFood.Data.Migrations
                     b.Navigation("Claims");
 
                     b.Navigation("Logins");
+
+                    b.Navigation("Producers");
 
                     b.Navigation("Roles");
 

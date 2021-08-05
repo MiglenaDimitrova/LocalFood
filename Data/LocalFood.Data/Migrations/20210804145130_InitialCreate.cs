@@ -110,6 +110,23 @@ namespace LocalFood.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Favorites",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Favorites", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Maps",
                 columns: table => new
                 {
@@ -399,6 +416,7 @@ namespace LocalFood.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     LocationId = table.Column<int>(type: "int", nullable: false),
+                    FavoriteId = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -411,6 +429,12 @@ namespace LocalFood.Data.Migrations
                         name: "FK_Producers_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Producers_Favorites_FavoriteId",
+                        column: x => x.FavoriteId,
+                        principalTable: "Favorites",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -590,6 +614,11 @@ namespace LocalFood.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Favorites_IsDeleted",
+                table: "Favorites",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FoodLosses_IsDeleted",
                 table: "FoodLosses",
                 column: "IsDeleted");
@@ -648,6 +677,11 @@ namespace LocalFood.Data.Migrations
                 name: "IX_Producers_ApplicationUserId",
                 table: "Producers",
                 column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Producers_FavoriteId",
+                table: "Producers",
+                column: "FavoriteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Producers_ImageId",
@@ -759,6 +793,9 @@ namespace LocalFood.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Producers");
+
+            migrationBuilder.DropTable(
+                name: "Favorites");
 
             migrationBuilder.DropTable(
                 name: "Images");

@@ -15,5 +15,11 @@
         IEnumerable<CountryInputModel> GetCountryNames();
 
         public IEnumerable<RegionInputModel> GetRegionNamesByCountry();
+
+        Task AddProducerToUserCollection(string userId, int producerId);
+
+        IEnumerable<ProducerViewModel> GetFavoriteProducers(string userId, int page, int itemsPerPage);
+
+        int FavoriteProducersCount(string userId);
     }
 }

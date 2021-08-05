@@ -39,13 +39,22 @@
                         </fieldset>
                     </div>
                 }
-                 <div class="card-body">
-                     <form method="post" asp-controller="Consumers" asp-route-id="@producer.Id" asp-action="AddToFavorites" id="deleteForm">
-                         <button class="btn btn-secondary">Добави в любими</button>
-                     </form>
-                     <a asp-controller="Consumers" asp-route-id="@producer.Id" asp-action="AddToFavorites" class="btn btn-primary" role="button" aria-pressed="true">Добави в любими</a>
-                 </div>
-
+                @if ((string)this.ViewData["Title"] == "Любими")
+                {
+                    <div class="card-body">
+                        <form method="post" asp-controller="Consumers" asp-route-id="@producer.Id" asp-action="DeleteFromFavorite">
+                            <button class="btn btn-danger">Премахни от любими</button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-body">
+                        <form method="post" asp-controller="Consumers" asp-route-id="@producer.Id" asp-action="AddToFavorites">
+                            <button class="btn btn-secondary">Добави в любими</button>
+                        </form>
+                    </div>
+                }
                 <div class="card-footer text-muted">
                     Регистриран на @producer.CreatedOn.ToShortDateString()
                 </div>
