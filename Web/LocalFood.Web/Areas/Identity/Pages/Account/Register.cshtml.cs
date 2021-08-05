@@ -86,10 +86,6 @@
                 {
                     await this._userManager.AddToRoleAsync(user, GlobalConstants.ProducerRoleName);
                 }
-                else
-                {
-                    await this._userManager.AddToRoleAsync(user, GlobalConstants.ConsumerRoleName);
-                }
 
                 if (result.Succeeded)
                 {

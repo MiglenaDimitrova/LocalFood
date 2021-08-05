@@ -24,5 +24,7 @@
         int FavoriteProducersCount(string userId);
 
         Task DeleteFavorite(string userId, int producerId);
+
+        string GetProducerUserId(int producerId);
     }
 }

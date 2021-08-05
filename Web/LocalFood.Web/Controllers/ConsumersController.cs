@@ -24,7 +24,7 @@
             this.userManager = userManager;
         }
 
-        [Authorize(Roles = GlobalConstants.ConsumerRoleName)]
+        [Authorize]
         public async Task<IActionResult> Favorites(int id = 1)
         {
             if (id <= 0)
@@ -44,12 +44,17 @@
             return this.View(model);
         }
 
-        [Authorize(Roles = GlobalConstants.ConsumerRoleName)]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddToFavorites(int id)
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            await this.producersService.AddProducerToUserCollection(user.Id, id);
+            var producerUserId = this.producersService.GetProducerUserId(id);
+            if (user.Id != producerUserId)
+            {
+                await this.producersService.AddProducerToUserCollection(user.Id, id);
+            }
+
             return this.Redirect("/Consumers/Favorites");
         }
 
