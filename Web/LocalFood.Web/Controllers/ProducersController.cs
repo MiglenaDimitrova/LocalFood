@@ -96,5 +96,11 @@
             };
             return this.View(model);
         }
+
+        public IActionResult Details(int id)
+        {
+            var model = this.producersService.GetProducerById(id);
+            return this.View(model);
+        }
     }
 }

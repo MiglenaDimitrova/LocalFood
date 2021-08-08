@@ -14,16 +14,29 @@
                         <h4 class="media-heading">@product.Name</h4>
                     </div>
                     <div class="media-body">
-                        <h5 class="media-heading">@product.CategoryName</h5>
+                        <h5 class="media-heading">Категория: @product.CategoryName</h5>
                     </div>
+                    <hr />
                     <div class="media-body">
                         <h6 class="media-heading">@product.Description</h6>
                     </div>
+                    <hr />
+                    @if ((string)this.ViewData["Title"] != "Моите продукти")
+                    {
+                        <div class="media-body">
+                            <h6 class="media-heading">Производител: @product.ProducerName</h6>
+                            <form method="post" asp-controller="Producers" asp-route-id="@product.ProducerId" asp-action="Details">
+                                <button class="btn btn-info">Виж профил</button>
+                            </form>
+                            <br />
+                            <form method="post" asp-controller="Products" asp-route-producerId="@product.ProducerId" asp-action="ProducerProductsAll">
+                                <button class="btn btn-warning">Виж всички продукти</button>
+                            </form>
+                        </div>
+                    }
+                    <br />
                     <div class="media-body">
-                        <h6 class="media-heading">@product.ProducerName</h6>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">@product.Price</h4>
+                        <h4 class="media-heading text-danger">Цена: @product.Price лв.</h4>
                     </div>
                 </div>
                 @if ((string)this.ViewData["Title"] == "Моите продукти")

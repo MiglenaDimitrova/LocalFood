@@ -1,22 +1,15 @@
-﻿namespace LocalFood.Data.Models
+﻿namespace LocalFood.Web.ViewModels.Markets
 {
-    using System.ComponentModel.DataAnnotations;
-
-    using LocalFood.Data.Common.Models;
-
-    public class Market : BaseDeletableModel<int>
+    public class MarketViewModel
     {
-        [Required]
         public string Name { get; set; }
 
         public string UrlLocation { get; set; }
 
         public string FacebookPage { get; set; }
 
-        [Required]
         public string FullAddress { get; set; }
 
-        [Required]
         public string Description { get; set; }
     }
 }

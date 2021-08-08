@@ -24,5 +24,7 @@
         Task DeleteFavorite(string userId, int producerId);
 
         string GetProducerUserId(int producerId);
+
+        ProducerViewModel GetProducerById(int id);
     }
 }

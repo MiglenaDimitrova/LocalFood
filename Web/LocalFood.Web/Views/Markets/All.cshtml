@@ -1,0 +1,37 @@
+﻿@model LocalFood.Web.ViewModels.Markets.MarketsListViewModel
+@{
+    this.ViewData["Title"] = "Пазари";
+}
+<hr />
+    <div class="row">
+        <div class="col-sm-12">
+            <img src="~/pics/fermersMarket.JPG" class="img-fluid" alt="Responsive image" />
+        </div>
+    </div>
+<hr />
+<div class="row">
+    @foreach (var market in Model.Markets)
+    {
+    <div class="col-sm-4 col-md-4">
+        <article class="article event">
+            <dl class="event-details">
+                <dd>@market.Name</dd>
+                <dt>@market.FullAddress</dt>
+                <dd>
+
+                    <i class="fa fa-map-marker icon-clock"></i>
+                    <a rel="noreferrer noopener" href="@market.UrlLocation " target="_blank">Виж на картата</a>
+                </dd>
+                <dd>
+                    <i class="fab fa-facebook-f"></i>
+                    <a rel="noreferrer noopener" href="@market.FacebookPage" target="_blank">Facebook група</a>
+                </dd>
+                <dd class="text-danger">@market.Description</dd>
+            </dl>
+        </article>
+        <hr />
+    </div>
+    }
+</div>
+<hr />
+<partial name="_PagingAllPartial" model="@Model">
