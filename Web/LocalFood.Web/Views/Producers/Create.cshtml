@@ -3,7 +3,7 @@
     this.ViewData["Title"] = "Добави профил";
 }
 <h1>@this.ViewData["Title"]</h1>
-    
+
 <form method="post" class="col-md-6" enctype="multipart/form-data">
     <div asp-validation-summary="All"></div>
     <hr>
@@ -52,9 +52,10 @@
     <div class="form-group">
         <label asp-for="CountryName"></label>
         <select asp-for="CountryName" class="form-control">
+            <option value="0" selected="selected">Избери</option>
             @foreach (var country in Model.Countries)
             {
-                <option value="@country.CountryName">@country.CountryName</option>
+                <option value="@country.Id">@country.CountryName</option>
             }
         </select>
         <span asp-validation-for="CountryName" class="text-danger"></span>
@@ -62,10 +63,6 @@
     <div class="form-group">
         <label asp-for="RegionName"></label>
         <select asp-for="RegionName" class="form-control">
-            @foreach (var region in Model.Regions)
-            {
-                <option value="@region.RegionName">@region.RegionName</option>
-            }
         </select>
         <span asp-validation-for="RegionName" class="text-danger"></span>
     </div>
@@ -92,3 +89,30 @@
     </div>
     <input type="submit" class="button btn-primary" value="Създай" />
 </form>
+@section Scripts
+{
+ <script>
+    if ($("#CountryName") != null) {
+        $("#CountryName").on("change",
+            function () {
+                var id = $(this).find("option:selected").val();
+                console.log(id);
+                $.ajax({
+                    method: 'GET',
+                    url: '/api/Regions',
+                    data: { id: id },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+                    .done(function success(data) {
+                        $('#RegionName').html('');
+                        for (var i = 0; i < data.length; i++) {
+                            var html = '<option value="' + data[i].id + '">' + data[i].regionName + '</option>';
+                            $('#RegionName').append(html);
+                        }
+                    });
+            });
+    }
+</script>
+}

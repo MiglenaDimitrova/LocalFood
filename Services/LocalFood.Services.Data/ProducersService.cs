@@ -115,19 +115,8 @@
             return this.countriesRepository.All()
                  .Select(x => new CountryInputModel
                  {
+                    Id = x.Id,
                     CountryName = x.Name,
-                 }).ToList();
-        }
-
-        // int countryId - parameter
-        public IEnumerable<RegionInputModel> GetRegionNamesByCountry()
-        {
-            return this.regionsRepository.All()
-
-                 // .Where(x => x.CountryId == countryId)
-                 .Select(x => new RegionInputModel
-                 {
-                     RegionName = x.Name,
                  }).ToList();
         }
 

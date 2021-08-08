@@ -47,7 +47,7 @@
         public string CountryName { get; set; }
 
         [Required]
-        [Display(Name = "Област")]
+        [Display(Name = "Област (Избери след като е избрана държава)")]
         public string RegionName { get; set; }
 
         [Required]

@@ -20,5 +20,6 @@
         "systemUsingDirectivesFirst": true,
         "blankLinesBetweenUsingGroups": "require"
       }
+    }
   }
 }

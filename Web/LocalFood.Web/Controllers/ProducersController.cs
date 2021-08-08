@@ -43,10 +43,6 @@
             {
                 Countries = countries,
             };
-            var regions = this.producersService.GetRegionNamesByCountry();
-
-            // AJAX for  country
-            model.Regions = regions;
             return this.View(model);
         }
 
@@ -56,7 +52,12 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                var countries = this.producersService.GetCountryNames();
+                var model = new ProducerInputModel
+                {
+                    Countries = countries,
+                };
+                return this.View(model);
             }
 
             var user = await this.userManager.GetUserAsync(this.User);

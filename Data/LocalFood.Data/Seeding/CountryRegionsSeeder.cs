@@ -7,10 +7,11 @@
     using System.Threading.Tasks;
 
     using LocalFood.Data.Models;
+    using Microsoft.AspNetCore.Identity;
 
     public class CountryRegionsSeeder : ISeeder
     {
-        public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
+        public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider, UserManager<ApplicationUser> userManager)
         {
             if (dbContext.Countries.Any())
             {

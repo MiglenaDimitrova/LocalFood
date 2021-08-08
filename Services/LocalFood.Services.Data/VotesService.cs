@@ -8,14 +8,10 @@
     public class VotesService : IVotesService
     {
         private readonly IRepository<Vote> votesRepository;
-        private readonly IDeletableEntityRepository<Producer> producersRepository;
 
-        public VotesService(
-            IRepository<Vote> votesRepository,
-            IDeletableEntityRepository<Producer> producersRepository)
+        public VotesService(IRepository<Vote> votesRepository)
         {
             this.votesRepository = votesRepository;
-            this.producersRepository = producersRepository;
         }
 
         public double GetAverageVote(int producerId)
