@@ -34,14 +34,15 @@
 
         public async Task AddProducer(ProducerInputModel input, string userId, string imagePath)
         {
-            var country = this.countriesRepository.All().FirstOrDefault(x => x.Name == input.CountryName);
-            var region = this.regionsRepository.All().FirstOrDefault(x => x.Name == input.RegionName);
+            var country = this.countriesRepository.All().FirstOrDefault(x => x.Id == input.CountryId);
+            var region = this.regionsRepository.All().FirstOrDefault(x => x.Id == input.RegionId);
             var location = new Location
             {
                 Country = country,
                 Region = region,
                 LocalityName = input.LocalityName,
                 Adress = input.Address,
+                UrlLocation = input.UrlLocation,
                 Longitude = input.Longitude,
                 Latitude = input.Latitude,
             };
@@ -105,6 +106,7 @@
                     PhoneNumber = x.PhoneNumber,
                     Site = x.Site,
                     Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                    UrlLocation = x.Location.UrlLocation,
                     CreatedOn = x.CreatedOn,
                     AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),
                 }).ToList();
@@ -167,6 +169,7 @@
                     PhoneNumber = x.PhoneNumber,
                     Site = x.Site,
                     Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                    UrlLocation = x.Location.UrlLocation,
                     CreatedOn = x.CreatedOn,
                     AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),
                 }).ToList();
@@ -205,6 +208,7 @@
                     PhoneNumber = x.PhoneNumber,
                     Site = x.Site,
                     Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                    UrlLocation = x.Location.UrlLocation,
                     CreatedOn = x.CreatedOn,
                     AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),
                 }).FirstOrDefault();

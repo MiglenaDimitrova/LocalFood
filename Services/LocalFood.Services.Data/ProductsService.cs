@@ -223,5 +223,11 @@
         {
             return this.producersRepository.All().FirstOrDefault(x => x.Id == producerId).Products.Count;
         }
+
+        public string GetNameByProducerId(int producerId)
+        {
+            var producer = this.producersRepository.All().FirstOrDefault(x => x.Id == producerId);
+            return $"{producer.FirstName} {producer.LastName}";
+        }
     }
 }

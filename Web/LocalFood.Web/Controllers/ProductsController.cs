@@ -163,12 +163,13 @@
                 return this.NotFound();
             }
 
-            var model = new ProductsListViewModel
+            var model = new ProducerProductsListViewModel
             {
                 ItemsPerPage = ItemsPerPage,
                 PageNumber = id,
                 Products = this.productsService.GetProducerProductsAll(producerId, id, ItemsPerPage),
                 ItemsCount = this.productsService.ProducerProductsCount(producerId),
+                ProducerName = this.productsService.GetNameByProducerId(producerId),
             };
             return this.View(model);
         }

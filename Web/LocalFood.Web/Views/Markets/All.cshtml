@@ -13,12 +13,11 @@
     @foreach (var market in Model.Markets)
     {
     <div class="col-sm-4 col-md-4">
-        <article class="article event">
-            <dl class="event-details">
+        <article>
+            <dl >
                 <dd>@market.Name</dd>
                 <dt>@market.FullAddress</dt>
                 <dd>
-
                     <i class="fa fa-map-marker icon-clock"></i>
                     <a rel="noreferrer noopener" href="@market.UrlLocation " target="_blank">Виж на картата</a>
                 </dd>

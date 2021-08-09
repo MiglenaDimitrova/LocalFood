@@ -22,6 +22,8 @@
 
         public string FullAddress { get; set; }
 
+        public string UrlLocation { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string AverageVote { get; set; }

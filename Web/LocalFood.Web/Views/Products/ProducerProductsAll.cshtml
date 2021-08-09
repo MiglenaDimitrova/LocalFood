@@ -1,39 +1,70 @@
-﻿@model LocalFood.Web.ViewModels.Products.ProductsListViewModel
+﻿@model LocalFood.Web.ViewModels.Products.ProducerProductsListViewModel
 @{
     this.ViewData["Title"] = "Продукти на производител";
 }
+<h1>@this.ViewData["Title"] @Model.ProducerName</h1>
 <hr />
-<partial name="_ProductsPartial" model="@Model">
-
-<hr />
-<nav class="mx-auto" aria-label="Page navigation">
-    <ul class="pagination  justify-content-center ">
-        <li class="page-item @if(!Model.HasPrevoiusPage) {<text>disabled</text>}">
-            <a class="page-link page-item" asp-action="ProducerProductsAll" asp-route-id="@Model.PrevoiusPageNumber">
-                <span class="page-item disabled" aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        @for (int i = Model.PageNumber - 3; i < Model.PageNumber; i++)
-        {
-            if (i > 0)
+<div class="row">
+    @foreach (var product in Model.Products)
+    {
+        <div class="media col-md-4">
+            <div class="align-content-around">
+                <div class="media-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+                        <image href=@product.Image class="media-object mr-3 img-responsive" width="100%" height="200" />
+                    </svg>
+                </div>
+                <div class="col">
+                    <div class="media-body">
+                        <h4 class="media-heading">@product.Name</h4>
+                    </div>
+                    <div class="media-body">
+                        <h5 class="media-heading">Категория: @product.CategoryName</h5>
+                    </div>
+                    <hr />
+                    <div class="media-body">
+                        <h6 class="media-heading">@product.Description</h6>
+                    </div>
+                    <hr />
+                    <br />
+                    <div class="media-body">
+                        <h4 class="media-heading text-danger">Цена: @product.Price лв.</h4>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+    <hr />
+    <nav class="mx-auto" aria-label="Page navigation">
+        <ul class="pagination  justify-content-center ">
+            <li class="page-item @if(!Model.HasPrevoiusPage) {<text>disabled</text>}">
+                <a class="page-link page-item" asp-action="ProducerProductsAll" asp-route-id="@Model.PrevoiusPageNumber">
+                    <span class="page-item disabled" aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = Model.PageNumber - 3; i < Model.PageNumber; i++)
             {
-                <li class="page-item"><a class="page-link" asp-action="ProducerProductsAll" asp-route-id="@i">@i</a></li>
+                if (i > 0)
+                {
+                    <li class="page-item"><a class="page-link" asp-action="ProducerProductsAll" asp-route-id="@i">@i</a></li>
+                }
             }
-        }
-        <li class="page-item active" aria-current="page">
-            <span class="page-link">@Model.PageNumber</span>
-        </li>
-        @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 3; i++)
-        {
-            if (i <= Model.PageCount)
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">@Model.PageNumber</span>
+            </li>
+            @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 3; i++)
             {
-                <li class="page-item"><a class="page-link" asp-action="ProducerProductsAll" asp-route-id="@i">@i</a></li>
+                if (i <= Model.PageCount)
+                {
+                    <li class="page-item"><a class="page-link" asp-action="ProducerProductsAll" asp-route-id="@i">@i</a></li>
+                }
             }
-        }
-        <li class="page-item @if(!Model.HasNextPage) {<text>disabled</text>}">
-            <a class="page-link page-item" asp-action="ProducerProductsAll" asp-route-id="@Model.NextPageNumber">
-                <span class="page-item disabled" aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+            <li class="page-item @if(!Model.HasNextPage) {<text>disabled</text>}">
+                <a class="page-link page-item" asp-action="ProducerProductsAll" asp-route-id="@Model.NextPageNumber">
+                    <span class="page-item disabled" aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>

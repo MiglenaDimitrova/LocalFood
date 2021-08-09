@@ -26,6 +26,8 @@
         [Required]
         public string Adress { get; set; }
 
+        public string UrlLocation { get; set; }
+
         public double? Longitude { get; set; }
 
         public double? Latitude { get; set; }

@@ -42,13 +42,12 @@
         [Display(Name = "Описание")]
         public string Description { get; set; }
 
-        [Required]
         [Display(Name = "Държава")]
-        public string CountryName { get; set; }
+        public int CountryId { get; set; }
 
         [Required]
-        [Display(Name = "Област (Избери след като е избрана държава)")]
-        public string RegionName { get; set; }
+        [Display(Name = "Област")]
+        public int RegionId { get; set; }
 
         [Required]
         [Display(Name = "Населено място")]
@@ -57,6 +56,9 @@
         [Required]
         [Display(Name = "Адрес")]
         public string Address { get; set; }
+
+        [Display(Name = "")]
+        public string UrlLocation { get; set; }
 
         [Display(Name = "Географска дължина")]
 

@@ -50,21 +50,21 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="CountryName"></label>
-        <select asp-for="CountryName" class="form-control">
+        <label asp-for="CountryId"></label>
+        <select asp-for="CountryId" class="form-control">
             <option value="0" selected="selected">Избери</option>
             @foreach (var country in Model.Countries)
             {
                 <option value="@country.Id">@country.CountryName</option>
             }
         </select>
-        <span asp-validation-for="CountryName" class="text-danger"></span>
+        <span asp-validation-for="CountryId" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="RegionName"></label>
-        <select asp-for="RegionName" class="form-control">
+        <label asp-for="RegionId"></label>
+        <select asp-for="RegionId" class="form-control">
         </select>
-        <span asp-validation-for="RegionName" class="text-danger"></span>
+        <span asp-validation-for="RegionId" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="LocalityName"></label>
@@ -76,24 +76,20 @@
         <input asp-for="Address" class="form-control" />
         <span asp-validation-for="Address" class="text-danger"></span>
     </div>
-    <div> За добавяне на картата на вашето местоположение, въведете:</div>
+    <a>Добави линк с локация от</a>
+    <a rel="noreferrer noopener" href="https://www.google.com/maps" target="_blank">google.maps</a>
     <div class="form-group">
-        <label asp-for="Longitude"></label>
-        <input asp-for="Longitude" class="form-control" />
-        <span asp-validation-for="Longitude" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Latitude"></label>
-        <input asp-for="Latitude" class="form-control" />
-        <span asp-validation-for="Latitude" class="text-danger"></span>
+        <label asp-for="UrlLocation"></label>
+        <input asp-for="UrlLocation" class="form-control" />
+        <span asp-validation-for="UrlLocation" class="text-danger"></span>
     </div>
     <input type="submit" class="button btn-primary" value="Създай" />
 </form>
 @section Scripts
 {
  <script>
-    if ($("#CountryName") != null) {
-        $("#CountryName").on("change",
+    if ($("#CountryId") != null) {
+        $("#CountryId").on("change",
             function () {
                 var id = $(this).find("option:selected").val();
                 console.log(id);
@@ -106,10 +102,10 @@
                     },
                 })
                     .done(function success(data) {
-                        $('#RegionName').html('');
+                        $('#RegionId').html('');
                         for (var i = 0; i < data.length; i++) {
                             var html = '<option value="' + data[i].id + '">' + data[i].regionName + '</option>';
-                            $('#RegionName').append(html);
+                            $('#RegionId').append(html);
                         }
                     });
             });

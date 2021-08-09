@@ -26,11 +26,5 @@
 
         public int CategoryId { get; set; }
 
-        // public void CreateMappings(IProfileExpression configuration)
-        // {
-        //    configuration.CreateMap<Product, ProductInputModel>()
-        //        .ForMember(x => x.Image, opt =>
-        //        opt.MapFrom(x => $"/images/products/{x.Image.Id}.{x.Image.Extension}"));
-        // }
     }
 }

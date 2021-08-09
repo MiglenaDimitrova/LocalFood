@@ -31,5 +31,7 @@
         IEnumerable<ProductViewModel> GetProducerProductsAll(int producerId, int page, int itemsPerPage);
 
         int ProducerProductsCount(int producerId);
+
+        public string GetNameByProducerId(int producerId);
     }
 }

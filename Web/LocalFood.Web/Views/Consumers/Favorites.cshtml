@@ -1,7 +1,9 @@
 ﻿@model LocalFood.Web.ViewModels.Producers.ProducersListViewModel
 @{
-    this.ViewData["Title"] = "Любими";
+    this.ViewData["Title"] = "Любими производители";
 }
+
+<h1>@this.ViewData["Title"]</h1>
 <hr />
 <partial name="_ProducersPartial" model="@Model">
     <hr />

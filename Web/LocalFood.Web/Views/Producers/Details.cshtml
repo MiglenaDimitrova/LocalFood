@@ -41,15 +41,7 @@
                 </fieldset>
             </div>
         }
-        @if ((string)this.ViewData["Title"] == "Любими")
-        {
-            <div class="card-body">
-                <form method="post" asp-controller="Consumers" asp-route-id="@Model.Id" asp-action="Delete">
-                    <button class="btn btn-danger">Премахни от любими</button>
-                </form>
-            </div>
-        }
-        else
+        @if(this.User.Identity.IsAuthenticated)
         {
             <div class="card-body">
                 <form method="post" asp-controller="Consumers" asp-route-id="@Model.Id" asp-action="AddToFavorites">
