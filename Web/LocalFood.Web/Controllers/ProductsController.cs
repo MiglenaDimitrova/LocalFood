@@ -122,6 +122,13 @@
         [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
         public IActionResult Edit(int id)
         {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var productUserId = this.productsService.GetUserIdByProduct(id);
+            if (userId != productUserId)
+            {
+                return this.Forbid();
+            }
+
             var categories = this.productsService.GetCategories();
             var model = this.productsService.GetProductById(id);
             model.Categories = categories;
@@ -132,16 +139,19 @@
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditProductInputModel input)
         {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var productUserId = this.productsService.GetUserIdByProduct(id);
+            if (userId != productUserId)
+            {
+                return this.Forbid();
+            }
+
             if (!this.ModelState.IsValid)
             {
                 var categories = this.productsService.GetCategories();
-
-                var model = new EditProductInputModel
-                {
-                    Categories = categories,
-                };
-
-                return this.View(model);
+                input.Categories = categories;
+                input.Id = id;
+                return this.View(input);
             }
 
             await this.productsService.UpdateProductAsync(id, input);
@@ -152,6 +162,12 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var productUserId = this.productsService.GetUserIdByProduct(id);
+            if (userId != productUserId)
+            {
+                return this.Forbid();
+            }
             await this.productsService.DeleteProductAsync(id);
             return this.Redirect("/Products/MyProducts");
         }

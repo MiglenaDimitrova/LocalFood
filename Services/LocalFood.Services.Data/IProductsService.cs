@@ -33,5 +33,7 @@
         int ProducerProductsCount(int producerId);
 
         public string GetNameByProducerId(int producerId);
+
+        string GetUserIdByProduct(int id);
     }
 }

@@ -176,7 +176,6 @@
                .Where(x => x.Id == id)
                .Select(x => new EditProductInputModel
                {
-                   Id = x.Id,
                    Description = x.Description,
                    Name = x.Name,
                    IsBio = x.IsBio.ToString(),
@@ -228,6 +227,13 @@
         {
             var producer = this.producersRepository.All().FirstOrDefault(x => x.Id == producerId);
             return $"{producer.FirstName} {producer.LastName}";
+        }
+
+        public string GetUserIdByProduct(int id)
+        {
+            var product = this.productsRepository.All().FirstOrDefault(x => x.Id == id);
+            var producer = this.producersRepository.All().FirstOrDefault(x => x.Id == product.ProducerId);
+            return producer.ApplicationUserId;
         }
     }
 }
