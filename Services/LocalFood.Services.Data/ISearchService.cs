@@ -1,10 +1,11 @@
 ﻿namespace LocalFood.Services.Data
 {
+    using System.Collections.Generic;
     using LocalFood.Web.ViewModels.Producers;
     using LocalFood.Web.ViewModels.Products;
 
     public interface ISearchService
     {
-        IEnumurable<ProductViewModel> GetSearchedProductsByKeyword(string keyword);
+        public IEnumerable<ProductViewModel> GetSearchedProductsByKeyword(string keyword);
     }
 }

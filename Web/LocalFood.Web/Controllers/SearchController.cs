@@ -17,12 +17,17 @@
 
         public IActionResult ProductsByKeyword(string keyword, int id = 1)
         {
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                return this.Redirect("/Home/Index");
+            }
+
             if (id <= 0)
             {
                 return this.NotFound();
             }
 
-            var products = (System.Collections.Generic.IEnumerable<ProductViewModel>)this.searchService.GetSearchedProductsByKeyword(keyword);
+            var products = this.searchService.GetSearchedProductsByKeyword(keyword);
             var model = new ProductsListViewModel
             {
                 ItemsPerPage = ItemsPerPage,
