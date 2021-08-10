@@ -75,6 +75,7 @@
             services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<IRegionsService, RegionsService>();
             services.AddTransient<IMarketsService, MarketsService>();
+            services.AddTransient<ISearchService, SearchService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

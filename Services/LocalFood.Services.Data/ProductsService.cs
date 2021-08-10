@@ -102,6 +102,7 @@
                     Name = x.Name,
                     Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
                     ProducerId = x.ProducerId,
+                    FullAddress = $"{x.Producer.Location.Region.Name}, {x.Producer.Location.Adress}",
                 })
                 .ToList();
         }
@@ -124,6 +125,8 @@
                     Name = x.Name,
                     Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
                     ProducerId = x.ProducerId,
+                    FullAddress = $"{x.Producer.Location.Region.Name}, {x.Producer.Location.Adress}",
+                    UrlLocation = x.Producer.Location.UrlLocation,
                 })
                 .ToList();
         }
@@ -159,6 +162,8 @@
                     Name = x.Name,
                     Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
                     ProducerId = x.ProducerId,
+                    FullAddress = $"{x.Producer.Location.Region.Name}, {x.Producer.Location.Adress}",
+                    UrlLocation = x.Producer.Location.UrlLocation,
                 })
                 .ToList();
         }
@@ -215,6 +220,8 @@
                     Name = x.Name,
                     Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
                     ProducerId = x.ProducerId,
+                    FullAddress = $"{x.Producer.Location.Region.Name}, {x.Producer.Location.Adress}",
+                    UrlLocation = x.Producer.Location.UrlLocation,
                 }).ToList();
         }
 

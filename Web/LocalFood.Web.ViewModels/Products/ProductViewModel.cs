@@ -26,5 +26,8 @@
 
         public int CategoryId { get; set; }
 
+        public string FullAddress { get; set; }
+
+        public string UrlLocation { get; set; }
     }
 }
