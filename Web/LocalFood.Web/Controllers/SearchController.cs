@@ -1,5 +1,6 @@
 ﻿namespace LocalFood.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
     using LocalFood.Services.Data;
     using LocalFood.Web.ViewModels.Products;
@@ -33,7 +34,7 @@
                 ItemsPerPage = ItemsPerPage,
                 PageNumber = id,
                 Products = products,
-                ItemsCount = 100,
+                ItemsCount = products.Count(),
             };
             return this.View(model);
         }

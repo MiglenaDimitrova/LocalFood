@@ -17,7 +17,7 @@
 
         public IEnumerable<ProductViewModel> GetSearchedProductsByKeyword(string keyword)
         {
-            var productsWithKeyword = new List<ProductViewModel>();
+            var productsWithKeyword = new HashSet<ProductViewModel>();
             var keywordToLower = keyword.ToLower();
             var products = this.productsRepository.All();
             var productsForSearch = products.Select(x => new ProductViewModel
@@ -28,7 +28,6 @@
                 CategoryName = x.Category.Name,
                 Price = x.Price,
                 Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
-
             }).ToList();
 
             foreach (var product in productsForSearch)

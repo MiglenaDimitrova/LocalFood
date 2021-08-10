@@ -213,5 +213,30 @@
                     AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),
                 }).FirstOrDefault();
         }
+
+        public IEnumerable<OurProducerViewModel> GetOwrProducers()
+        {
+            return this.producersRepository.All()
+                .Where(x => x.Votes.Count > 0)
+                .Select(x => new OurProducerViewModel
+                {
+                    Id = x.Id,
+                    FullName = $"{x.FirstName} {x.LastName}",
+                    CompanyName = x.CompanyName,
+                    Description = x.Description,
+                    Email = x.Email,
+                    FullAddress = $"{x.Location.Region.Name}, {x.Location.LocalityName}, {x.Location.Adress}",
+                    PhoneNumber = x.PhoneNumber,
+                    Site = x.Site,
+                    Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                    UrlLocation = x.Location.UrlLocation,
+                    CreatedOn = x.CreatedOn,
+                    AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),
+                    AverargeVoteAsDouble = x.Votes.Average(x => x.Value),
+                })
+                .OrderByDescending(x => x.AverargeVoteAsDouble)
+                .Take(6)
+                .ToList();
+        }
     }
 }

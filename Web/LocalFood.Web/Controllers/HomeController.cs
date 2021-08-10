@@ -1,16 +1,28 @@
 ﻿namespace LocalFood.Web.Controllers
 {
     using System.Diagnostics;
-
+    using LocalFood.Services.Data;
     using LocalFood.Web.ViewModels;
-
+    using LocalFood.Web.ViewModels.Producers;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
+        private readonly IProducersService producersService;
+
+        public HomeController(IProducersService producersService)
+        {
+            this.producersService = producersService;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var model = new OurProducersViewModel
+            {
+                Producers = this.producersService.GetOwrProducers(),
+            };
+
+            return this.View(model);
         }
 
         public IActionResult Privacy()
