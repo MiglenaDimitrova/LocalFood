@@ -10,9 +10,6 @@
     <link href="~/css/minty-theme.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-
-
-
 </head>
 <body>
     <header>
@@ -29,11 +26,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Markets" asp-action="All">Пазари</a>
                         </li>
-
                         @if (User.IsInRole(GlobalConstants.ProducerWithProfileRoleName))
                         {
                             <partial name="_ProducerDropdownPartial" />
-
                         }
                         else
                         {
@@ -44,18 +39,16 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="All">Продукти</a>
                             </li>
                         }
-
-                        @if (User.IsInRole(GlobalConstants.ProducerRoleName))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Producers" asp-action="Create">Създай профил</a>
-                            </li>
-                        }
-                        
                         @if (User.Identity != null && !User.IsInRole(GlobalConstants.ProducerWithProfileRoleName))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Consumers" asp-action="Favorites">Любими</a>
+                            </li>
+                        }
+                        @if (User.IsInRole(GlobalConstants.ProducerRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Producers" asp-action="Create">Създай профил</a>
                             </li>
                         }
                     </ul>
@@ -109,10 +102,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
-
-    <script src="../_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="~/js/site.min.js" asp-appendersion="true"></script>

@@ -238,5 +238,10 @@
                 .Take(6)
                 .ToList();
         }
+
+        public int GetProducerIdByUserId(string userId)
+        {
+            return this.producersRepository.All().FirstOrDefault(x => x.ApplicationUserId == userId).Id;
+        }
     }
 }

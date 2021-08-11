@@ -102,5 +102,68 @@
             var model = this.producersService.GetProducerById(id);
             return this.View(model);
         }
+
+        [Authorize(Roles= GlobalConstants.ProducerWithProfileRoleName)]
+        public IActionResult MyProfile()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var producerId = this.producersService.GetProducerIdByUserId(userId);
+            var model = this.producersService.GetProducerById(producerId);
+            return this.View(model);
+        }
+
+        //public IActionResult Edit(int id)
+        //{
+        //    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    var producerUserId = this.producersService.GetProducerUserId(id);
+        //    if (userId != producerUserId)
+        //    {
+        //        return this.Forbid();
+        //    }
+
+        //    var model = this.producersService.GetProducerById(id);
+        //    var countries = this.producersService.GetCountryNames();
+        //    model.
+            
+        //    return this.View(model);
+        //}
+
+        //[Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(int id, EditProductInputModel input)
+        //{
+        //    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    var productUserId = this.productsService.GetUserIdByProduct(id);
+        //    if (userId != productUserId)
+        //    {
+        //        return this.Forbid();
+        //    }
+
+        //    if (!this.ModelState.IsValid)
+        //    {
+        //        var categories = this.productsService.GetCategories();
+        //        input.Categories = categories;
+        //        input.Id = id;
+        //        return this.View(input);
+        //    }
+
+        //    await this.productsService.UpdateProductAsync(id, input);
+        //    return this.Redirect("/Products/MyProducts");
+        //}
+
+        //[Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
+        //[HttpPost]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    var productUserId = this.productsService.GetUserIdByProduct(id);
+        //    if (userId != productUserId)
+        //    {
+        //        return this.Forbid();
+        //    }
+
+        //    await this.productsService.DeleteProductAsync(id);
+        //    return this.Redirect("/Products/MyProducts");
+        //}
     }
 }

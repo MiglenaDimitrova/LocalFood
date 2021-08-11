@@ -28,5 +28,7 @@
         ProducerViewModel GetProducerById(int id);
 
         IEnumerable<OurProducerViewModel> GetOwrProducers();
+
+        int GetProducerIdByUserId(string userId);
     }
 }

@@ -1,0 +1,109 @@
+﻿@model LocalFood.Web.ViewModels.Producers.EditProducerInputModel
+@{
+    this.ViewData["Title"] = "Редактирай профил";
+}
+<h1>@this.ViewData["Title"]</h1>
+
+<form method="post" class="col-md-6" enctype="multipart/form-data">
+    <div asp-validation-summary="All"></div>
+    <hr>
+    <div class="form-group">
+        <label asp-for="FirstName">
+        </label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CompanyName"></label>
+        <input asp-for="CompanyName" class="form-control" />
+        <span asp-validation-for="CompanyName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Site"></label>
+        <input asp-for="Site" class="form-control" />
+        <span asp-validation-for="Site" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CountryId"></label>
+        <select asp-for="CountryId" class="form-control">
+            <option value="0" selected="selected">Избери</option>
+            @foreach (var country in Model.Countries)
+            {
+                <option value="@country.Id">@country.CountryName</option>
+            }
+        </select>
+        <span asp-validation-for="CountryId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RegionId"></label>
+        <select asp-for="RegionId" class="form-control">
+        </select>
+        <span asp-validation-for="RegionId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LocalityName"></label>
+        <input asp-for="LocalityName" class="form-control" />
+        <span asp-validation-for="LocalityName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <a>Добави линк с локация от</a>
+    <a rel="noreferrer noopener" href="https://www.google.com/maps" target="_blank">google.maps</a>
+    <div class="form-group">
+        <label asp-for="UrlLocation"></label>
+        <input asp-for="UrlLocation" class="form-control" />
+        <span asp-validation-for="UrlLocation" class="text-danger"></span>
+    </div>
+    <input type="submit" class="button btn-primary" value="Създай" />
+</form>
+@section Scripts
+{
+ <script>
+    if ($("#CountryId") != null) {
+        $("#CountryId").on("change",
+            function () {
+                var id = $(this).find("option:selected").val();
+                console.log(id);
+                $.ajax({
+                    method: 'GET',
+                    url: '/api/Regions',
+                    data: { id: id },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+                    .done(function success(data) {
+                        $('#RegionId').html('');
+                        for (var i = 0; i < data.length; i++) {
+                            var html = '<option value="' + data[i].id + '">' + data[i].regionName + '</option>';
+                            $('#RegionId').append(html);
+                        }
+                    });
+            });
+    }
+</script>
+}

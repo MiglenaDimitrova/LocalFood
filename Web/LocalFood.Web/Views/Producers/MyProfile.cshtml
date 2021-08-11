@@ -1,0 +1,55 @@
+﻿@model LocalFood.Web.ViewModels.Producers.ProducerViewModel
+@{
+    this.ViewData["Title"] = "Моят профил";
+}
+<br />
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+<div class="media col-md-4 d-flex align-items-stretch">
+    <div class="card mb-3">
+        <h3 class="card-header">@Model.FullName</h3>
+        <div class="card-body">
+            <h5 class="card-title">@Model.CompanyName</h5>
+            <h6 class="card-subtitle text-muted">@Model.FullAddress</h6>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+            <image href=@Model.Image class="media-object mr-3 img-responsive" width="100%" height="200" />
+        </svg>
+        <div class="card-body">
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">@Model.PhoneNumber</li>
+            <li class="list-group-item">@Model.Site</li>
+            <li class="list-group-item">@Model.Email</li>
+        </ul>
+        <br/>
+        <div class="btn-group">
+            <a asp-controller="Producers" asp-route-id="@Model.Id" asp-action="Edit" class="btn btn-warning" role="button" aria-pressed="true">Редактирай</a>
+            <form method="post" asp-controller="Producers" asp-route-id="@Model.Id" asp-action="Delete" id="deleteForm">
+            </form>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
+        </div>
+    </div>
+    
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Изтрий профил</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Сигурен ли си, че желаеш да изтриеш профила си?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="document.getElementById('deleteForm').submit()">Да</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Не</button>
+            </div>
+        </div>
+    </div>
+</div>
