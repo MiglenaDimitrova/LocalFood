@@ -8,10 +8,14 @@
     public class VotesService : IVotesService
     {
         private readonly IRepository<Vote> votesRepository;
+        private readonly IDeletableEntityRepository<Producer> producersRepository;
 
-        public VotesService(IRepository<Vote> votesRepository)
+        public VotesService(
+            IRepository<Vote> votesRepository,
+            IDeletableEntityRepository<Producer> producersRepository)
         {
             this.votesRepository = votesRepository;
+            this.producersRepository = producersRepository;
         }
 
         public double GetAverageVote(int producerId)
@@ -19,6 +23,11 @@
             return this.votesRepository.All()
                  .Where(x => x.ProducerId == producerId)
                  .Select(x => (double)x.Value).Average();
+        }
+
+        public string GetProducerUserId(int producerId)
+        {
+            return this.producersRepository.All().FirstOrDefault(x => x.Id == producerId).ApplicationUserId;
         }
 
         public async Task SetVoteAsync(int producerId, string userId, byte value)

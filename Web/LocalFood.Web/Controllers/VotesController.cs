@@ -23,6 +23,12 @@
         public async Task<ActionResult<VoteResponseModel>> Post(VoteInputModel input)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var producerUserId = this.votesService.GetProducerUserId(input.ProducerId);
+            if (userId == producerUserId)
+            {
+                return new VoteResponseModel { AverageVote = this.votesService.GetAverageVote(input.ProducerId) };
+            }
+
             await this.votesService.SetVoteAsync(input.ProducerId, userId, input.Value);
             var averageVote = this.votesService.GetAverageVote(input.ProducerId);
             return new VoteResponseModel { AverageVote = averageVote };

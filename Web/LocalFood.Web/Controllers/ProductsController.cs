@@ -168,6 +168,7 @@
             {
                 return this.Forbid();
             }
+
             await this.productsService.DeleteProductAsync(id);
             return this.Redirect("/Products/MyProducts");
         }

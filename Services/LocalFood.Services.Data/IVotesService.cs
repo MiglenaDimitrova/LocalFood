@@ -7,5 +7,7 @@
         Task SetVoteAsync (int producerId, string userId, byte value);
 
         double GetAverageVote(int producerId);
+
+        string GetProducerUserId(int producerId);
     }
 }

@@ -82,3 +82,8 @@ body {
     padding-left: 0;
     padding-right: 0;
 }
+
+.myclass{
+    text-align :center;
+    font-size : 50px;
+}
