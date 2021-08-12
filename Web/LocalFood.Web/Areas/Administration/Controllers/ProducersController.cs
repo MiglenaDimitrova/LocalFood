@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+
     using LocalFood.Data;
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
@@ -20,8 +21,7 @@
             IDeletableEntityRepository<Producer> producersRepository,
             IRepository<Image> imagesRepository,
             IDeletableEntityRepository<Location> locationsRepository,
-            IDeletableEntityRepository<ApplicationUser> usersRepository
-            )
+            IDeletableEntityRepository<ApplicationUser> usersRepository)
         {
             this.producersRepository = producersRepository;
             this.imagesRepository = imagesRepository;
@@ -79,6 +79,7 @@
                 await this.producersRepository.SaveChangesAsync();
                 return this.RedirectToAction(nameof(this.Index));
             }
+
             this.ViewData["ApplicationUserId"] = new SelectList(this.usersRepository.All(), "Id", "Id", producer.ApplicationUserId);
             this.ViewData["ImageId"] = new SelectList(this.imagesRepository.All(), "Id", "Id", producer.ImageId);
             this.ViewData["LocationId"] = new SelectList(this.locationsRepository.All(), "Id", "Adress", producer.LocationId);
@@ -86,7 +87,7 @@
         }
 
         // GET: Administration/Producers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -98,6 +99,7 @@
             {
                 return this.NotFound();
             }
+
             this.ViewData["ApplicationUserId"] = new SelectList(this.usersRepository.All(), "Id", "Id", producer.ApplicationUserId);
             this.ViewData["ImageId"] = new SelectList(this.imagesRepository.All(), "Id", "Id", producer.ImageId);
             this.ViewData["LocationId"] = new SelectList(this.locationsRepository.All(), "Id", "Adress", producer.LocationId);
@@ -134,8 +136,10 @@
                         throw;
                     }
                 }
+
                 return this.RedirectToAction(nameof(this.Index));
             }
+
             this.ViewData["ApplicationUserId"] = new SelectList(this.usersRepository.All(), "Id", "Id", producer.ApplicationUserId);
             this.ViewData["ImageId"] = new SelectList(this.imagesRepository.All(), "Id", "Id", producer.ImageId);
             this.ViewData["LocationId"] = new SelectList(this.locationsRepository.All(), "Id", "Adress", producer.LocationId);

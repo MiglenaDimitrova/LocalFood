@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+
     using LocalFood.Data;
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
@@ -65,7 +66,7 @@
         }
 
         // GET: Administration/Categories/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {

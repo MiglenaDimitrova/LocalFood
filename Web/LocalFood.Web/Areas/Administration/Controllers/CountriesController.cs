@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using LocalFood.Data;
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
@@ -63,11 +64,12 @@
                 await this.categoriesRepository.SaveChangesAsync();
                 return this.RedirectToAction(nameof(this.Index));
             }
+
             return this.View(country);
         }
 
         // GET: Administration/Countries/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -79,6 +81,7 @@
             {
                 return this.NotFound();
             }
+
             return this.View(country);
         }
 
@@ -112,8 +115,10 @@
                         throw;
                     }
                 }
+
                 return this.RedirectToAction(nameof(this.Index));
             }
+
             return this.View(country);
         }
 

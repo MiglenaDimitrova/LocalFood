@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
     using LocalFood.Web.ViewModels.Products;
@@ -27,6 +28,11 @@
                 ProducerName = $"{x.Producer.FirstName} {x.Producer.LastName}",
                 CategoryName = x.Category.Name,
                 Price = x.Price,
+                CategoryId = x.CategoryId,
+                Description = x.Description,
+                ProducerId = x.ProducerId,
+                UrlLocation = x.Producer.Location.UrlLocation,
+                IsBio = x.IsBio,
                 Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
             }).ToList();
 

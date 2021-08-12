@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
     using Microsoft.AspNetCore.Mvc;
@@ -60,11 +61,12 @@
                 await this.marketsRepository.SaveChangesAsync();
                 return this.RedirectToAction(nameof(this.Index));
             }
+
             return this.View(market);
         }
 
         // GET: Administration/Markets/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {

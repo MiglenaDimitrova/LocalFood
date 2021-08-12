@@ -1,6 +1,7 @@
 ﻿namespace LocalFood.Services.Data
 {
     using System.Collections.Generic;
+
     using LocalFood.Web.ViewModels.Producers;
     using LocalFood.Web.ViewModels.Products;
 

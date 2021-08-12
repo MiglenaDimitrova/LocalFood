@@ -5,6 +5,7 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
     using LocalFood.Data;
     using LocalFood.Data.Common;
     using LocalFood.Data.Common.Repositories;
@@ -13,14 +14,11 @@
     using LocalFood.Data.Seeding;
     using LocalFood.Services.Data;
     using LocalFood.Services.Messaging;
-
-    using CommandLine;
-
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Microsoft.AspNetCore.Identity;
 
     public static class Program
     {

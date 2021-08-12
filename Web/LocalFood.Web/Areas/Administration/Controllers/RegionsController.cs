@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using LocalFood.Data;
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
@@ -47,7 +48,7 @@
                 return this.NotFound();
             }
 
-            return View(region);
+            return this.View(region);
         }
 
         // GET: Administration/Regions/Create
@@ -70,12 +71,13 @@
                 await this.regionsRepository.SaveChangesAsync();
                 return this.RedirectToAction(nameof(this.Index));
             }
+
             this.ViewData["CountryId"] = new SelectList(this.countriesRepository.All(), "Id", "Name", region.CountryId);
             return this.View(region);
         }
 
         // GET: Administration/Regions/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
