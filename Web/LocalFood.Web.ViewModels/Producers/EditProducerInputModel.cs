@@ -5,6 +5,8 @@
 
     public class EditProducerInputModel
     {
+        public int Id { get; set; }
+
         [Required]
         [Display(Name = "Име")]
         [MinLength(2, ErrorMessage = "Името трябва да съдържа поне 2 символа.")]
@@ -54,16 +56,6 @@
         [Display(Name = "")]
         public string UrlLocation { get; set; }
 
-        [Display(Name = "Географска дължина")]
-
-        public double? Longitude { get; set; }
-
-        [Display(Name = "Географска ширина")]
-
-        public double? Latitude { get; set; }
-
         public IEnumerable<CountryInputModel> Countries { get; set; }
-
-        public IEnumerable<RegionInputModel> Regions { get; set; }
     }
 }

@@ -17,6 +17,7 @@
         private readonly IDeletableEntityRepository<Producer> producersRepository;
         private readonly IDeletableEntityRepository<Country> countriesRepository;
         private readonly IDeletableEntityRepository<Region> regionsRepository;
+        private readonly IDeletableEntityRepository<Location> locationsRepository;
         private readonly IDeletableEntityRepository<UserProducer> usersProducersRepository;
         private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
 
@@ -24,12 +25,14 @@
             IDeletableEntityRepository<Producer> producersRepository,
             IDeletableEntityRepository<Region> regionsRepository,
             IDeletableEntityRepository<UserProducer> usersProducersRepository,
-            IDeletableEntityRepository<Country> countriesRepository)
+            IDeletableEntityRepository<Country> countriesRepository,
+            IDeletableEntityRepository<Location> locationsRepository)
         {
             this.producersRepository = producersRepository;
             this.countriesRepository = countriesRepository;
             this.regionsRepository = regionsRepository;
             this.usersProducersRepository = usersProducersRepository;
+            this.locationsRepository = locationsRepository;
         }
 
         public async Task AddProducer(ProducerInputModel input, string userId, string imagePath)
@@ -143,12 +146,8 @@
                 Producer = producer,
             };
 
-            // var user = this.applicationUsersRepository.All().FirstOrDefault(x => x.Id == userId);
-            // user.Producers.Add(userProducer);
             await this.usersProducersRepository.AddAsync(userProducer);
             await this.usersProducersRepository.SaveChangesAsync();
-
-            // await this.applicationUsersRepository.SaveChangesAsync();
         }
 
         public IEnumerable<ProducerViewModel> GetFavoriteProducers(string userId, int page, int itemsPerPage = 12)
@@ -242,6 +241,51 @@
         public int GetProducerIdByUserId(string userId)
         {
             return this.producersRepository.All().FirstOrDefault(x => x.ApplicationUserId == userId).Id;
+        }
+
+        public EditProducerInputModel GetMyProfile(int id)
+        {
+            return this.producersRepository.All().Where(x => x.Id == id)
+                .Select(x => new EditProducerInputModel
+                {
+                    CompanyName = x.CompanyName,
+                    Description = x.Description,
+                    Email = x.Email,
+                    Address = x.Location.Adress,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    LocalityName = x.Location.LocalityName,
+                    PhoneNumber = x.PhoneNumber,
+                    Site = x.Site,
+                    UrlLocation = x.Location.UrlLocation,
+                }).FirstOrDefault();
+        }
+
+        public async Task UpdateProfileAsync(int id, EditProducerInputModel input)
+        {
+            var producer = this.producersRepository.All().FirstOrDefault(x => x.Id == id);
+            var location = this.locationsRepository.All().FirstOrDefault(x => x.Id == producer.LocationId);
+            producer.FirstName = input.FirstName;
+            producer.LastName = input.LastName;
+            producer.PhoneNumber = input.PhoneNumber;
+            producer.CompanyName = input.CompanyName;
+            producer.Description = input.Description;
+            producer.Site = input.Site;
+            location.Adress = input.Address;
+            location.LocalityName = input.LocalityName;
+            location.CountryId = input.CountryId;
+            location.RegionId = input.RegionId;
+            location.UrlLocation = input.UrlLocation;
+
+            await this.locationsRepository.SaveChangesAsync();
+            await this.producersRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteProfileAsync(int id)
+        {
+            var producer = this.producersRepository.All().FirstOrDefault(x => x.Id == id);
+            this.producersRepository.Delete(producer);
+            await this.producersRepository.SaveChangesAsync();
         }
     }
 }

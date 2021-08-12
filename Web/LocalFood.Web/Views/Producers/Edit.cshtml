@@ -78,7 +78,8 @@
         <input asp-for="UrlLocation" class="form-control" />
         <span asp-validation-for="UrlLocation" class="text-danger"></span>
     </div>
-    <input type="submit" class="button btn-primary" value="Създай" />
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" class="button btn-primary" value="Запази" />
 </form>
 @section Scripts
 {

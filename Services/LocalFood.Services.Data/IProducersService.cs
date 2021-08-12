@@ -27,8 +27,14 @@
 
         ProducerViewModel GetProducerById(int id);
 
+        EditProducerInputModel GetMyProfile(int id);
+
         IEnumerable<OurProducerViewModel> GetOwrProducers();
 
         int GetProducerIdByUserId(string userId);
+
+        Task UpdateProfileAsync(int id, EditProducerInputModel input);
+
+        Task DeleteProfileAsync(int id);
     }
 }

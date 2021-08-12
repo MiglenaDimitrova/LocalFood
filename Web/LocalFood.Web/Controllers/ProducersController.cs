@@ -112,58 +112,65 @@
             return this.View(model);
         }
 
-        //public IActionResult Edit(int id)
-        //{
-        //    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    var producerUserId = this.producersService.GetProducerUserId(id);
-        //    if (userId != producerUserId)
-        //    {
-        //        return this.Forbid();
-        //    }
+        [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
+        public IActionResult Edit(int id)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var producerUserId = this.producersService.GetProducerUserId(id);
+            if (userId != producerUserId)
+            {
+                return this.Forbid();
+            }
 
-        //    var model = this.producersService.GetProducerById(id);
-        //    var countries = this.producersService.GetCountryNames();
-        //    model.
-            
-        //    return this.View(model);
-        //}
+            var model = this.producersService.GetMyProfile(id);
+            var countries = this.producersService.GetCountryNames();
+            model.Countries = countries;
 
-        //[Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(int id, EditProductInputModel input)
-        //{
-        //    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    var productUserId = this.productsService.GetUserIdByProduct(id);
-        //    if (userId != productUserId)
-        //    {
-        //        return this.Forbid();
-        //    }
+            return this.View(model);
+        }
 
-        //    if (!this.ModelState.IsValid)
-        //    {
-        //        var categories = this.productsService.GetCategories();
-        //        input.Categories = categories;
-        //        input.Id = id;
-        //        return this.View(input);
-        //    }
+        [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditProducerInputModel input)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var producerUserId = this.producersService.GetProducerUserId(id);
+            if (userId != producerUserId)
+            {
+                return this.Forbid();
+            }
 
-        //    await this.productsService.UpdateProductAsync(id, input);
-        //    return this.Redirect("/Products/MyProducts");
-        //}
+            if (!this.ModelState.IsValid)
+            {
+                var model = this.producersService.GetMyProfile(id);
+                var countries = this.producersService.GetCountryNames();
+                model.Countries = countries;
+            }
 
-        //[Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
-        //[HttpPost]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    var productUserId = this.productsService.GetUserIdByProduct(id);
-        //    if (userId != productUserId)
-        //    {
-        //        return this.Forbid();
-        //    }
+            await this.producersService.UpdateProfileAsync(id, input);
+            return this.Redirect("/Producers/MyProfile");
+        }
 
-        //    await this.productsService.DeleteProductAsync(id);
-        //    return this.Redirect("/Products/MyProducts");
-        //}
+        [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var producerUserId = this.producersService.GetProducerUserId(id);
+            if (userId != producerUserId)
+            {
+                return this.Forbid();
+            }
+
+            await this.producersService.DeleteProfileAsync(id);
+            await this.userManager.RemoveFromRoleAsync(user, GlobalConstants.ProducerWithProfileRoleName);
+            await this.userManager.AddToRoleAsync(user, GlobalConstants.ProducerRoleName);
+
+            await this.signInManager.SignOutAsync();
+            await this.signInManager.SignInAsync(user, true);
+
+            return this.Redirect("/Home/Index");
+        }
     }
 }
