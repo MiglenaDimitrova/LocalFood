@@ -52,19 +52,27 @@ Using ASP.NET-MVC-Template developed by
 <br/>
 Using technology  
 <br/>
-•	ASP.NET Core
+<br/>
 
-•	EF Core
+•	ASP.NET Core 
+<br/>
 
-•	MSSQL Server
+•	EF Core 
+<br/>
 
-•	Bootstrap
+•	MSSQL Server 
+<br/>
+
+•	Bootstrap 
+<br/>
 
 •	AJAX 
+<br/>
 
-•	jQuery
+•	jQuery 
+<br/>
 
-•	FontAwesem
+•	FontAwesome
 <br/>
 <br/>
 
