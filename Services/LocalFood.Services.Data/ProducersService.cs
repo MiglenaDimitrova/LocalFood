@@ -75,13 +75,13 @@
                     throw new Exception($"{extension} e невалидно разширениe.");
                 }
 
-                var dbImage = new Image
+                var imageDb = new Image
                 {
                     AddedByUserId = userId,
                     Extension = extension,
                 };
-                producer.Image = dbImage;
-                var physicalPath = $"{imagePath}/producers/{dbImage.Id}.{extension}";
+                producer.Image = imageDb;
+                var physicalPath = $"{imagePath}/producers/{imageDb.Id}.{extension}";
                 using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
                 {
                     await input.Image.CopyToAsync(fileStream);
