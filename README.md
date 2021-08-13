@@ -6,13 +6,13 @@ The producer can create his own profile, edit it and delete it. Can add, edit an
 - Consumers/Users:
 
 The user can be registered or not. Unregistered users can see producers and products, as well as information about farmers' markets.
-Registered users can additionally create their own collection of manufacturers, as well as evaluate manufacturers.
+Registered users can additionally create their own collection of producers and remove them, as well as evaluate producers.
 -  Farmer's markets:
 
 Information on farmers' markets.
 -  Administrator:
 
-The administrator can add, change and delete the categories of the offered products, the products themselves and the profiles of the manufacturers, as well as the information about the markets. You can add countries and areas to them.
+The administrator can add, edit and delete the categories of the offered products, the products themselves and the profiles of the producers, as well as the information about the markets. He can add, edit and delete countries and regions.
 - Search engine:
 
 There is a simple search engine that searches the products.
