@@ -23,9 +23,6 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Markets" asp-action="All">Пазари</a>
-                        </li>
                         @if (User.IsInRole(GlobalConstants.ProducerWithProfileRoleName))
                         {
                             <partial name="_ProducerDropdownPartial" />
@@ -51,6 +48,9 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Producers" asp-action="Create">Създай профил</a>
                             </li>
                         }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Markets" asp-action="All">Пазари</a>
+                        </li>
                     </ul>
                 </div>
             </div>
