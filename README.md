@@ -78,6 +78,6 @@ Using technology
 
 Coming soon:
 <br/>
-The most important part of the application - the implementation of Google Maps, where to visualize the locations of manufacturers. Also to locate the producer himself and to be directed to the nearest producers.
+The most important part of the application - the implementation of Google Maps, where to visualize the locations of producers. Also to locate the producer himself and to be directed to the nearest producers.
 A more complex search engine is about to be implemented, which will filter by different criteria.
 A section is to be implemented in which producers can place urgent ads for food that needs to be donated or sold quickly, as there is a danger of spoiling - FoodLosses.
