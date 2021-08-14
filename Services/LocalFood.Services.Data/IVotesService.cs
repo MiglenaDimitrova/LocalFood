@@ -8,6 +8,5 @@
 
         double GetAverageVote(int producerId);
 
-        string GetProducerUserId(int producerId);
     }
 }

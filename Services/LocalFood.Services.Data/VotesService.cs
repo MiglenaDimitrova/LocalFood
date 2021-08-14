@@ -25,11 +25,6 @@
                  .Select(x => (double)x.Value).Average();
         }
 
-        public string GetProducerUserId(int producerId)
-        {
-            return this.producersRepository.All().FirstOrDefault(x => x.Id == producerId).ApplicationUserId;
-        }
-
         public async Task SetVoteAsync(int producerId, string userId, byte value)
         {
             var vote = this.votesRepository.All()
