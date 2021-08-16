@@ -39,7 +39,6 @@
                 ProducerId = producer.Id,
                 Description = input.Description,
                 Price = input.Price,
-                IsBio = bool.Parse(input.IsBio),
             };
             if (input.Image == null)
             {
@@ -82,21 +81,21 @@
                 .ToList();
         }
 
-        public IEnumerable<ProductViewModel> GetMyProducts(string userId, int page, int itemsPerPage = 12)
+        public IEnumerable<ProductViewModel> GetMyProducts(string userId, int page, int itemsPerPage)
         {
-            var producer = this.producersRepository.AllAsNoTracking().FirstOrDefault(x => x.ApplicationUserId == userId);
-            return this.productsRepository.AllAsNoTracking()
+            var producer = this.producersRepository.All().FirstOrDefault(x => x.ApplicationUserId == userId);
+            var products = this.productsRepository.All().ToList();
+            return this.productsRepository.All()
+                .Where(x => x.ProducerId == producer.Id)
                 .OrderByDescending(x => x.Id)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
-                .Where(x => x.ProducerId == producer.Id)
                 .Select(x => new ProductViewModel
                 {
                     Id = x.Id,
                     CategoryName = x.Category.Name,
                     CategoryId = x.CategoryId,
                     Description = x.Description,
-                    IsBio = x.IsBio,
                     Price = x.Price,
                     ProducerName = $"{x.Producer.FirstName} {x.Producer.LastName}",
                     Name = x.Name,
@@ -109,7 +108,7 @@
 
         public IEnumerable<ProductViewModel> GetAllProducts(int page, int itemsPerPage = 12)
         {
-            return this.productsRepository.AllAsNoTracking()
+            return this.productsRepository.All()
                 .OrderByDescending(x => x.Id)
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
@@ -119,7 +118,6 @@
                     CategoryName = x.Category.Name,
                     CategoryId = x.CategoryId,
                     Description = x.Description,
-                    IsBio = x.IsBio,
                     Price = x.Price,
                     ProducerName = $"{x.Producer.FirstName} {x.Producer.LastName}",
                     Name = x.Name,
@@ -133,39 +131,15 @@
 
         public int MyProductsCount(string userId)
         {
-            var producer = this.producersRepository.AllAsNoTracking().FirstOrDefault(x => x.ApplicationUserId == userId);
-            return this.productsRepository.AllAsNoTracking()
+            var producer = this.producersRepository.All().FirstOrDefault(x => x.ApplicationUserId == userId);
+            return this.productsRepository.All()
                 .Where(x => x.ProducerId == producer.Id)
                 .Count();
         }
 
         public int ProductsCount()
         {
-            return this.productsRepository.AllAsNoTracking().Count();
-        }
-
-        public IEnumerable<ProductViewModel> ProductsByUser(int producerId, int page, int itemsPerPage = 12)
-        {
-            return this.productsRepository.AllAsNoTracking()
-                .Where(x => x.ProducerId == producerId)
-                .OrderByDescending(x => x.Id)
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
-                .Select(x => new ProductViewModel
-                {
-                    CategoryName = x.Category.Name,
-                    CategoryId = x.CategoryId,
-                    Description = x.Description,
-                    IsBio = x.IsBio,
-                    Price = x.Price,
-                    ProducerName = $"{x.Producer.FirstName} {x.Producer.LastName}",
-                    Name = x.Name,
-                    Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
-                    ProducerId = x.ProducerId,
-                    FullAddress = $"{x.Producer.Location.Region.Name}, {x.Producer.Location.Adress}",
-                    UrlLocation = x.Producer.Location.UrlLocation,
-                })
-                .ToList();
+            return this.productsRepository.All().Count();
         }
 
         public async Task DeleteProductAsync(int id)
@@ -183,7 +157,6 @@
                {
                    Description = x.Description,
                    Name = x.Name,
-                   IsBio = x.IsBio.ToString(),
                    Price = x.Price,
                    CategoryName = x.Category.Name,
                }).FirstOrDefault();
@@ -195,7 +168,6 @@
                .Where(x => x.Id == id).FirstOrDefault();
             product.Name = input.Name;
             product.Description = input.Description;
-            product.IsBio = bool.Parse(input.IsBio);
             product.Price = input.Price;
             product.Category = this.categoriesRepository.All().FirstOrDefault(x => x.Name == input.CategoryName);
 
@@ -214,7 +186,6 @@
                     CategoryName = x.Category.Name,
                     CategoryId = x.CategoryId,
                     Description = x.Description,
-                    IsBio = x.IsBio,
                     Price = x.Price,
                     ProducerName = $"{x.Producer.FirstName} {x.Producer.LastName}",
                     Name = x.Name,

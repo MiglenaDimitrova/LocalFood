@@ -17,8 +17,6 @@
 
         public virtual Image Image { get; set; }
 
-        public bool IsBio { get; set; } = false;
-
         public int ProducerId { get; set; }
 
         public virtual Producer Producer { get; set; }

@@ -9,12 +9,12 @@
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето не може да бъде празно.")]
         [Display(Name = "Име на продукт")]
         [MinLength(3, ErrorMessage = "Името трябва да съдържа поне 3 символа.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Въведи цена.")]
+        [Required(ErrorMessage = "Полето не може да бъде празно.")]
         [Display(Name = "Цена")]
         [Range(0, 10000, ErrorMessage = "Цената трябва да бъде между 0 и 10 000 лв.")]
         public decimal Price { get; set; }
@@ -22,10 +22,7 @@
         [Display(Name = "Описание")]
         public string Description { get; set; }
 
-        [Display(Name = "Био-продукт")]
-        public string IsBio { get; set; }
-
-        [Required(ErrorMessage = "Въведи категория.")]
+        [Required(ErrorMessage = "Полето не може да бъде празно.")]
         [Display(Name = "Категория")]
         public string CategoryName { get; set; }
 

@@ -61,11 +61,10 @@
                 return this.View(model);
             }
 
-            // from cookie- var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             try
             {
-                await this.productsService.AddProduct(input, user.Id, $"{this.environment.ContentRootPath}/wwwroot/images");
+                await this.productsService.AddProduct(input, userId, $"{this.environment.ContentRootPath}/wwwroot/images");
             }
             catch (Exception ex)
             {
@@ -101,20 +100,20 @@
         }
 
         [Authorize(Roles = GlobalConstants.ProducerWithProfileRoleName)]
-        public async Task<IActionResult> MyProducts(int id = 1)
+        public IActionResult MyProducts(int id = 1)
         {
             if (id <= 0)
             {
                 return this.NotFound();
             }
 
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var model = new ProductsListViewModel
             {
                 ItemsPerPage = ItemsPerPage,
                 PageNumber = id,
-                Products = this.productsService.GetMyProducts(user.Id, id, ItemsPerPage),
-                ItemsCount = this.productsService.MyProductsCount(user.Id),
+                Products = this.productsService.GetMyProducts(userId, id, ItemsPerPage),
+                ItemsCount = this.productsService.MyProductsCount(userId),
             };
             return this.View(model);
         }

@@ -32,7 +32,6 @@
                 Description = x.Description,
                 ProducerId = x.ProducerId,
                 UrlLocation = x.Producer.Location.UrlLocation,
-                IsBio = x.IsBio,
                 Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
             }).ToList();
 

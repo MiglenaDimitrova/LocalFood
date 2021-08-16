@@ -20,8 +20,6 @@
 
         int ProductsCount();
 
-        IEnumerable<ProductViewModel> ProductsByUser(int producerId, int page, int itemsPerPage);
-
         EditProductInputModel GetProductById(int id);
 
         Task UpdateProductAsync(int id, EditProductInputModel input);

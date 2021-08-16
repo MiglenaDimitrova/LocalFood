@@ -28,14 +28,6 @@
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="IsBio"></label>
-        <select asp-for="IsBio" class="form-control">
-            <option value="false">Не</option>
-            <option value="true">Да</option>
-        </select>
-        <span asp-validation-for="IsBio" class="text-danger"></span>
-    </div>
-    <div class="form-group">
         <label asp-for="CategoryName"></label>
         <select asp-for="CategoryName" class="form-control">
             @foreach (var category in Model.Categories)

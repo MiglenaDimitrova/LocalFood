@@ -16,8 +16,6 @@
 
         public string Image { get; set; }
 
-        public bool IsBio { get; set; } = false;
-
         public string ProducerName { get; set; }
 
         public int ProducerId { get; set; }

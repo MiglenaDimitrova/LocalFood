@@ -94,7 +94,12 @@
             @this.RenderBody()
         </main>
     </div>
-
+    @if ((string)this.ViewData["Title"] == "Home Page")
+    {
+        <div class="container-fluid no-padding">
+            <img src="~/pics/footer-Index.png" class="img-fluid w-100" alt="Responsive image" />
+        </div>
+    }
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

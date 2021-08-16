@@ -11,6 +11,8 @@
         <div class="card-body">
             <h5 class="card-title">@Model.CompanyName</h5>
             <h6 class="card-subtitle text-muted">@Model.FullAddress</h6>
+            <i class="fa fa-map-marker icon-clock"></i>
+            <a rel="noreferrer noopener" href="@Model.UrlLocation" target="_blank">Виж на картата</a>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
             <image href=@Model.Image class="media-object mr-3 img-responsive" width="100%" height="200" />
