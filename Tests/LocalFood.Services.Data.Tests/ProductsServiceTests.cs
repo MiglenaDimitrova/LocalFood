@@ -121,7 +121,7 @@
         }
 
         [Fact]
-        public async Task AddProductShouldCreateObject()
+        public async Task AddProductShouldWorkCorrectly()
         {
             var listProducts = new List<Product>()
             {
@@ -166,6 +166,7 @@
             Assert.Equal(2, mockRepoProducts.Object.All().Count());
         }
 
+        // In-Memory Database
         [Fact]
         public async Task ProductsCountShouldReturnCorrectValueUsingDbContext()
         {
