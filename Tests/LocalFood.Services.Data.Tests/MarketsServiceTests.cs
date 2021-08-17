@@ -21,7 +21,7 @@
         public async Task MarketsCountShouldReturnCorrectValueUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ProductsTestDb").Options;
+                .UseInMemoryDatabase(databaseName: "MarketsTestDb").Options;
             using var dbContext = new ApplicationDbContext(options);
             dbContext.Markets.Add(new Market());
             dbContext.Markets.Add(new Market());

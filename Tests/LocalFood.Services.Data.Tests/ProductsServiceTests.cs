@@ -27,7 +27,8 @@
             {
                 new Producer
                 {
-                    Id = 1, ApplicationUserId = "abv",
+                    Id = 1,
+                    ApplicationUserId = "abv",
                     FirstName = "Иван",
                     LastName = "Иванов",
                     Location = new Location
@@ -38,7 +39,8 @@
                 },
                 new Producer
                 {
-                    Id = 2, ApplicationUserId = "bvc",
+                    Id = 2,
+                    ApplicationUserId = "bvc",
                     FirstName = "Дончо",
                     LastName = "Георгиев",
                     Location = new Location

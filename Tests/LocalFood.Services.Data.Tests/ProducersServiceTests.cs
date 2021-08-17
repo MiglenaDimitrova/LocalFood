@@ -133,7 +133,7 @@
         public async Task ProductsCountShouldReturnCorrectValueUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ProductsTestDb").Options;
+                .UseInMemoryDatabase(databaseName: "ProducersTestDb").Options;
             using var dbContext = new ApplicationDbContext(options);
             dbContext.Producers.Add(new Producer());
             dbContext.Producers.Add(new Producer());
@@ -205,13 +205,6 @@
             await this.service.AddProducerToUserCollection("bcd", 1);
             Assert.Equal(2, this.listUsersProducers.Count);
         }
-
-        //[Fact]
-        //public void FavoriteProducersCountShouldWorkCorrectly()
-        //{
-        //    var result = this.service.FavoriteProducersCount("abc");
-        //    Assert.Equal(1, result);
-        //}
 
         [Fact]
         public async Task DeleteFavoriteShouldWorkCorrectly()

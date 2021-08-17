@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\LocalFood.Data\LocalFood.Data.csproj" />
     <ProjectReference Include="..\..\Services\LocalFood.Services.Data\LocalFood.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Web\LocalFood.Web\LocalFood.Web.csproj" />
   </ItemGroup>
 
 </Project>
