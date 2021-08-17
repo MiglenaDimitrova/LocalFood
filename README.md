@@ -23,10 +23,11 @@ Interface
 <br/>
 Index page
 <img src="https://user-images.githubusercontent.com/62557893/129253822-edd3b9e9-fd78-401d-904f-d1ff19afe65f.png" width="100%"></img> 
-Producers
-<img src="https://user-images.githubusercontent.com/62557893/129253818-bf414009-75d1-4199-a595-4de0f3b9f78e.png" width="100%"></img>
 
 Products
+<img src="https://user-images.githubusercontent.com/62557893/129253818-bf414009-75d1-4199-a595-4de0f3b9f78e.png" width="100%"></img>
+
+Producers
 <img src="https://user-images.githubusercontent.com/62557893/129253817-7f3834ea-bb9f-4611-b635-8bc69c666375.png" width="100%"></img>
 
 Markets
@@ -35,22 +36,11 @@ Markets
 Administration
 <img src="https://user-images.githubusercontent.com/62557893/129253809-a1a57769-838e-4889-b028-7f3ec86056bc.png" width="100%"></img>   
 
-<br/>
-<br/>
 
-
-Using ASP.NET-MVC-Template developed by  
-
-
-• [Nikolay Kostov](https://github.com/NikolayIT)
-
-• [Vladislav Karamfilov](https://github.com/vladislav-karamfilov)
-
-• [Stoyan Shopov](https://github.com/StoyanShopov)  
 
 <br/>
 <br/>
-Using technology  
+Using technology:  
 <br/>
 <br/>
 
@@ -75,6 +65,15 @@ Using technology
 •	FontAwesome
 <br/>
 <br/>
+
+Using ASP.NET-MVC-Template developed by:
+
+
+• [Nikolay Kostov](https://github.com/NikolayIT)
+
+• [Vladislav Karamfilov](https://github.com/vladislav-karamfilov)
+
+• [Stoyan Shopov](https://github.com/StoyanShopov)  
 
 Coming soon:
 <br/>
