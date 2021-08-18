@@ -106,7 +106,7 @@
             Mock<IDeletableEntityRepository<Producer>> mockRepoProducers = new();
             mockRepoProducts.Setup(x => x.All()).Returns(listProducts.AsQueryable());
             var searchService = new SearchService(mockRepoProducts.Object);
-            var result = searchService.GetSearchedProductsByKeyword("домат").ToList();
+            var result = searchService.GetSearchedProductsByKeyword("домат", 1,12).ToList();
             Assert.Equal(1, result.Count);
             Assert.Equal("Домати", result[0].Name);
         }

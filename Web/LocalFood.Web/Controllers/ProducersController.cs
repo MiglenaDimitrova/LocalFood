@@ -16,7 +16,7 @@
 
     public class ProducersController : BaseController
     {
-        private const int ItemsPerPage = 12;
+        private const int ItemsPerPage = 6;
         private readonly IProducersService producersService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;

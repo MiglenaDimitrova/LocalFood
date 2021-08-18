@@ -56,7 +56,7 @@
         [Display(Name = "Адрес")]
         public string Address { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = " ")]
         [Url(ErrorMessage = "Невалиден линк")]
         public string UrlLocation { get; set; }
 

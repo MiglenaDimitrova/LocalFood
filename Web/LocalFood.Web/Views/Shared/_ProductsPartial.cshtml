@@ -47,12 +47,13 @@
                 </div>
                 @if ((string)this.ViewData["Title"] == "Моите продукти")
                 {
-            <div class="btn-group">
-                <a asp-controller="Products" asp-route-id="@product.Id" asp-action="Edit" class="btn btn-warning" role="button" aria-pressed="true">Редактирай</a>
-                <form method="post" asp-controller="Products" asp-route-id="@product.Id" asp-action="Delete">
-                    <button class="btn btn-danger" >Изтрий</button>
-                </form>
-            </div>
+                <div class="btn-group">
+                    <a asp-controller="Products" asp-route-id="@product.Id" asp-action="Edit" class="btn btn-warning" role="button" aria-pressed="true">Редактирай</a>
+                    <form method="post" asp-controller="Products" asp-route-id="@product.Id" asp-action="Delete">
+                        <button class="btn btn-danger" >Изтрий</button>
+                    </form>
+                </div>
+                <hr />
                 }
             </div>
         </div>
