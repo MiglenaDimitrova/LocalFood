@@ -1,6 +1,5 @@
 ﻿namespace LocalFood.Web.Tests
 {
-    using System.Linq;
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
     using LocalFood.Services.Data;

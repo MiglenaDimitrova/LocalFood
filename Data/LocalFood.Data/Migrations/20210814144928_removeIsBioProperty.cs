@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace LocalFood.Data.Migrations
+﻿namespace LocalFood.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class removeIsBioProperty : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

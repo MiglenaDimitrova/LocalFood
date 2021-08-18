@@ -1,7 +1,6 @@
 ﻿namespace LocalFood.Web.Controllers
 {
     using System.Linq;
-    using System.Threading.Tasks;
     using LocalFood.Services.Data;
     using LocalFood.Web.ViewModels.Products;
     using Microsoft.AspNetCore.Mvc;
@@ -18,7 +17,7 @@
 
         public IActionResult ProductsByKeyword(string keyword, int id = 1)
         {
-            if (string.IsNullOrWhiteSpace(keyword))
+            if (string.IsNullOrWhiteSpace(keyword) && id == 1)
             {
                 return this.Redirect("/Home/Index");
             }
@@ -28,13 +27,14 @@
                 return this.NotFound();
             }
 
-            var products = this.searchService.GetSearchedProductsByKeyword(keyword);
+            var products = this.searchService.GetSearchedProductsByKeyword(keyword, id, ItemsPerPage);
+            var itemsCount = this.searchService.GetSearchedProductsCount(keyword);
             var model = new ProductsListViewModel
             {
                 ItemsPerPage = ItemsPerPage,
                 PageNumber = id,
                 Products = products,
-                ItemsCount = products.Count(),
+                ItemsCount = itemsCount,
             };
             return this.View(model);
         }

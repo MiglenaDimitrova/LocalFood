@@ -1,8 +1,6 @@
 ﻿namespace LocalFood.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using LocalFood.Common;
     using LocalFood.Data.Models;
     using LocalFood.Services.Data;
     using LocalFood.Web.ViewModels.Producers;

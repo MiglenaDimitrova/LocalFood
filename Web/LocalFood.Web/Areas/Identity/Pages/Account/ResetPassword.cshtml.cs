@@ -1,9 +1,6 @@
 ﻿namespace LocalFood.Web.Areas.Identity.Pages.Account
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
     using LocalFood.Data.Models;
@@ -85,6 +82,7 @@
             {
                 this.ModelState.AddModelError(string.Empty, error.Description);
             }
+
             return this.Page();
         }
     }

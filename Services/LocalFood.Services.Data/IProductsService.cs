@@ -2,8 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using LocalFood.Data.Models;
     using LocalFood.Web.ViewModels.Products;
 
     public interface IProductsService

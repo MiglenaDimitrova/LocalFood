@@ -31,21 +31,6 @@
         @if (this.User.Identity.IsAuthenticated)
         {
             <div class="card-body">
-                <h5 class="card-text">Оцени</h5>
-                <fieldset class="rating">
-                    <span class="star" producer-id="@Model.Id" data-vote="1"><i class="fa fa-star"></i></span>
-                    <span class="star" producer-id="@Model.Id" data-vote="2"><i class="fa fa-star"></i></span>
-                    <span class="star" producer-id="@Model.Id" data-vote="3"><i class="fa fa-star"></i></span>
-                    <span class="star" producer-id="@Model.Id" data-vote="4"><i class="fa fa-star"></i></span>
-                    <span class="star" producer-id="@Model.Id" data-vote="5"><i class="fa fa-star"></i></span>
-                    <span class="myratings" id="averageVoteValue @Model.Id">@Model.AverageVote</span>
-                    <span class="myratings"> / 5</span>
-                </fieldset>
-            </div>
-        }
-        @if (this.User.Identity.IsAuthenticated)
-        {
-            <div class="card-body">
                 <form method="post" asp-controller="Consumers" asp-route-id="@Model.Id" asp-action="AddToFavorites">
                     <button class="btn btn-secondary">Добави в любими</button>
                 </form>
@@ -56,30 +41,3 @@
         </div>
     </div>
 </div>
-@section Scripts
-{
-    <script>
-         $("span[data-vote]").each(function (el) {
-             $(this).click(function () {
-                 var value = $(this).attr("data-vote");
-                 var producerId = $(this).attr("producer-id");
-                 var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
-                 var data = { producerId: producerId, value: value };
-                 $.ajax({
-                     type: 'POST',
-                     url: '/api/Votes',
-                     data: JSON.stringify(data),
-                     headers: {
-                         'X-CSRF-TOKEN': antiForgeryToken,
-                     },
-                     success: function (data) {
-                         $(document.getElementById('averageVoteValue ' + producerId + '')).html(data.averageVote.toFixed(1));
-                     },
-                     contentType: 'application/json'
-                 });
-             });
-         });
-
-    </script>
-
-}

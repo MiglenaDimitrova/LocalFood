@@ -1,9 +1,7 @@
 ﻿namespace LocalFood.Services.Data.Tests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using LocalFood.Data;
     using LocalFood.Data.Common.Repositories;
@@ -210,7 +208,7 @@
         public async Task DeleteFavoriteShouldWorkCorrectly()
         {
             await this.service.DeleteFavorite("abv", 2);
-            Assert.Equal(0, listUsersProducers.Count);
+            Assert.Equal(0, this.listUsersProducers.Count);
         }
 
         [Fact]
@@ -254,7 +252,7 @@
         public async Task DeleteProfileAsyncWorkCorrectly()
         {
             await this.service.DeleteProfileAsync(1);
-            Assert.Equal(1, this.listProducers.Count());
+            Assert.Equal(1, this.listProducers.Count);
         }
     }
 }

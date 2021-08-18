@@ -12,7 +12,6 @@
     using LocalFood.Data.Models;
     using LocalFood.Data.Repositories;
     using LocalFood.Data.Seeding;
-    using LocalFood.Services.Data;
     using LocalFood.Services.Messaging;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -54,7 +53,6 @@
 
             // var settingsService = serviceProvider.GetService<ISettingsService>();
             // Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
-
             Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);
         }

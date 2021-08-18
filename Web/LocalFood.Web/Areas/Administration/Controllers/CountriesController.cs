@@ -1,15 +1,10 @@
 ﻿namespace LocalFood.Web.Areas.Administration.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using LocalFood.Data;
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
 
     public class CountriesController : AdministrationController

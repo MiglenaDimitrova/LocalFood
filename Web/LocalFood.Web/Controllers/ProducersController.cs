@@ -9,7 +9,6 @@
     using LocalFood.Data.Models;
     using LocalFood.Services.Data;
     using LocalFood.Web.ViewModels.Producers;
-    using LocalFood.Web.ViewModels.Products;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;

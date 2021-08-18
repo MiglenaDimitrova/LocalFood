@@ -9,8 +9,6 @@
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
     using LocalFood.Web.ViewModels.Producers;
-    using LocalFood.Web.ViewModels.Products;
-    using Microsoft.AspNetCore.Http;
 
     public class ProducersService : IProducersService
     {
@@ -81,7 +79,7 @@
                     Extension = extension,
                 };
                 producer.Image = imageDb;
-                var physicalPath = $"{imagePath}/producers/{imageDb.Id}.{extension}";
+                var physicalPath = $"{imagePath}/producers/{imageDb.Id}{extension}";
                 using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
                 {
                     await input.Image.CopyToAsync(fileStream);
@@ -92,7 +90,7 @@
             await this.producersRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<ProducerViewModel> GetAllProducers(int page, int itemsPerPage = 12)
+        public IEnumerable<ProducerViewModel> GetAllProducers(int page, int itemsPerPage)
         {
             return this.producersRepository.All()
                 .OrderByDescending(x => x.Id)
@@ -108,7 +106,7 @@
                     FullAddress = $"{x.Location.Region.Name}, {x.Location.LocalityName}, {x.Location.Adress}",
                     PhoneNumber = x.PhoneNumber,
                     Site = x.Site,
-                    Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                    Image = $"/images/producers/{x.Image.Id}{x.Image.Extension}",
                     UrlLocation = x.Location.UrlLocation,
                     CreatedOn = x.CreatedOn,
                     AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),
@@ -167,7 +165,7 @@
                     FullAddress = $"{x.Location.Region.Name}, {x.Location.LocalityName}, {x.Location.Adress}",
                     PhoneNumber = x.PhoneNumber,
                     Site = x.Site,
-                    Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                    Image = $"/images/producers/{x.Image.Id}{x.Image.Extension}",
                     UrlLocation = x.Location.UrlLocation,
                     CreatedOn = x.CreatedOn,
                     AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),
@@ -206,7 +204,7 @@
                     FullAddress = $"{x.Location.Region.Name}, {x.Location.LocalityName}, {x.Location.Adress}",
                     PhoneNumber = x.PhoneNumber,
                     Site = x.Site,
-                    Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                    Image = $"/images/producers/{x.Image.Id}{x.Image.Extension}",
                     UrlLocation = x.Location.UrlLocation,
                     CreatedOn = x.CreatedOn,
                     AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),
@@ -227,7 +225,7 @@
                     FullAddress = $"{x.Location.Region.Name}, {x.Location.LocalityName}, {x.Location.Adress}",
                     PhoneNumber = x.PhoneNumber,
                     Site = x.Site,
-                    Image = $"/images/producers/{x.Image.Id}.{x.Image.Extension}",
+                    Image = $"/images/producers/{x.Image.Id}{x.Image.Extension}",
                     UrlLocation = x.Location.UrlLocation,
                     CreatedOn = x.CreatedOn,
                     AverageVote = x.Votes.Average(x => x.Value).ToString("f1"),

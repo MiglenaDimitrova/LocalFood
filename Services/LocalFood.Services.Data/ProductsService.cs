@@ -8,7 +8,6 @@
 
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
-    using LocalFood.Services.Mapping;
     using LocalFood.Web.ViewModels.Products;
 
     public class ProductsService : IProductsService
@@ -42,7 +41,7 @@
             };
             if (input.Image == null)
             {
-                product.Image = null;
+                product.Image = new Image { AddedByUserId = userId, Extension = ".png", Id = "noImage" };
             }
             else
             {
@@ -60,7 +59,7 @@
                 };
                 product.Image = imageDb;
 
-                var physicalPath = $"{imagePath}/products/{imageDb.Id}.{extension}";
+                var physicalPath = $"{imagePath}/products/{imageDb.Id}{extension}";
                 using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
                 {
                     await input.Image.CopyToAsync(fileStream);
@@ -99,14 +98,14 @@
                     Price = x.Price,
                     ProducerName = $"{x.Producer.FirstName} {x.Producer.LastName}",
                     Name = x.Name,
-                    Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
+                    Image = $"/images/products/{x.Image.Id}{x.Image.Extension}",
                     ProducerId = x.ProducerId,
                     FullAddress = $"{x.Producer.Location.Region.Name}, {x.Producer.Location.Adress}",
                 })
                 .ToList();
         }
 
-        public IEnumerable<ProductViewModel> GetAllProducts(int page, int itemsPerPage = 12)
+        public IEnumerable<ProductViewModel> GetAllProducts(int page, int itemsPerPage)
         {
             return this.productsRepository.All()
                 .OrderByDescending(x => x.Id)
@@ -121,7 +120,7 @@
                     Price = x.Price,
                     ProducerName = $"{x.Producer.FirstName} {x.Producer.LastName}",
                     Name = x.Name,
-                    Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
+                    Image = $"/images/products/{x.Image.Id}{x.Image.Extension}",
                     ProducerId = x.ProducerId,
                     FullAddress = $"{x.Producer.Location.Region.Name}, {x.Producer.Location.Adress}",
                     UrlLocation = x.Producer.Location.UrlLocation,
@@ -189,7 +188,7 @@
                     Price = x.Price,
                     ProducerName = $"{x.Producer.FirstName} {x.Producer.LastName}",
                     Name = x.Name,
-                    Image = $"/images/products/{x.Image.Id}.{x.Image.Extension}",
+                    Image = $"/images/products/{x.Image.Id}{x.Image.Extension}",
                     ProducerId = x.ProducerId,
                     FullAddress = $"{x.Producer.Location.Region.Name}, {x.Producer.Location.Adress}",
                     UrlLocation = x.Producer.Location.UrlLocation,

@@ -1,9 +1,6 @@
 ﻿namespace LocalFood.Web.Tests
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
     using LocalFood.Services.Data;
@@ -49,18 +46,6 @@
                 .ShouldReturn()
                 .View();
         }
-
-        //[Fact]
-        //public void CreatePostShoulPostCorrectModelandShouldHaveAuthorizeAndPostAttribute()
-        //{
-        //    MyController<ProducersController>
-        //        .Instance()
-        //        .WithUser(GlobalMocking.GetFakeUser().Id)
-        //        .Calling(c => c.Create(GlobalMocking.GetFakeCreateProducerModel()))
-        //        .ShouldHave()
-        //        .ActionAttributes(c => c.RestrictingForAuthorizedRequests()
-        //        .RestrictingForHttpMethod(HttpMethod.Post));
-        //}
 
         [Fact]
         public void AllShouldReturnViewWithCorrectModel()

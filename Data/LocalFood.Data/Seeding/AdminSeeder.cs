@@ -6,7 +6,6 @@
     using LocalFood.Common;
     using LocalFood.Data.Models;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
     public class AdminSeeder : ISeeder
     {

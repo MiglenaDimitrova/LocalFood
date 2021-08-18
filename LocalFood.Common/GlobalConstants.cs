@@ -7,6 +7,5 @@
         public const string AdministratorRoleName = "Administrator";
         public const string ProducerRoleName = "Producer";
         public const string ProducerWithProfileRoleName = "ProducerWithProfile";
-        public const string ConsumerRoleName = "Consumer";
     }
 }

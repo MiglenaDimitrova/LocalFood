@@ -1,9 +1,5 @@
 ﻿namespace LocalFood.Web.ViewModels.Products
 {
-    using AutoMapper;
-    using LocalFood.Data.Models;
-    using LocalFood.Services.Mapping;
-
     public class ProductViewModel // : IMapFrom<Product>, IHaveCustomMappings
     {
         public int Id { get; set; }

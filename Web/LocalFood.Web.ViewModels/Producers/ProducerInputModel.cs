@@ -2,8 +2,6 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
-    using LocalFood.Data.Models;
     using Microsoft.AspNetCore.Http;
 
     public class ProducerInputModel

@@ -1,9 +1,7 @@
 ﻿namespace LocalFood.Services.Data.Tests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using LocalFood.Data;
     using LocalFood.Data.Common.Repositories;
@@ -40,7 +38,7 @@
                 {
                  Id = 1,
                  Name = "Софийска област",
-                 Country = new Country{ Id = 1, Name = "България", },
+                 Country = new Country { Id = 1, Name = "България", },
                  CountryId = 1,
                 },
                 new Region

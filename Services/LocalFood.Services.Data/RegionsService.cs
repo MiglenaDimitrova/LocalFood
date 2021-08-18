@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using LocalFood.Data.Common.Repositories;
     using LocalFood.Data.Models;
     using LocalFood.Web.ViewModels.Producers;

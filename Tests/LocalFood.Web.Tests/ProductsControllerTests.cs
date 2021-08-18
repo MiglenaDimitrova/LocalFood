@@ -1,17 +1,8 @@
 ﻿namespace LocalFood.Web.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using LocalFood.Data.Common.Repositories;
-    using LocalFood.Data.Models;
-    using LocalFood.Services.Data;
     using LocalFood.Web.Controllers;
     using LocalFood.Web.Tests.Mock;
     using LocalFood.Web.ViewModels.Products;
-    using Microsoft.AspNetCore.Mvc;
-    using Moq;
     using MyTested.AspNetCore.Mvc;
     using Xunit;
 

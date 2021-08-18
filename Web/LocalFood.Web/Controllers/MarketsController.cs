@@ -1,9 +1,7 @@
 ﻿namespace LocalFood.Web.Controllers
 {
-    using LocalFood.Common;
     using LocalFood.Services.Data;
     using LocalFood.Web.ViewModels.Markets;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class MarketsController : BaseController
